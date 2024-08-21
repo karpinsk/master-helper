@@ -18,15 +18,13 @@ class HomeScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: MenuButton(
-                  destination: Specification(
-                    itemSelected: false,
-                  ),
+                  destination: Specification(),
                   text: 'Детали',
                 ),
               ),
               Expanded(
                 child: MenuButton(
-                  destination: AddDetailScreen(),
+                  destination: DetailForm(),
                   text: 'Добавить деталь',
                 ),
               ),

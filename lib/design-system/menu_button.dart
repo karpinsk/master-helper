@@ -13,11 +13,12 @@ class MenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0), // Adds space below the button
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          minimumSize: const Size(double.infinity, 36), // Ensure button takes full width
-          backgroundColor: const Color(0xFF4682B4), // Steel Blue
+          minimumSize: const Size(double.infinity, 36),
+          backgroundColor: const Color(0xFF4682B4),
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
         ),
         onPressed: () {
           Navigator.push(

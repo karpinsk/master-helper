@@ -9,7 +9,7 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('Settings')),
       body: const Center(
         child: Text(
-          'This is the Settings Screen',
+          'В настройках пока ничего нет, но в скором времени что-то обязательно появится :)',
           style: TextStyle(fontSize: 24),
         ),
       ),
