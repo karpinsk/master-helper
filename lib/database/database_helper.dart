@@ -1,7 +1,6 @@
 import 'package:slasher/models/detail.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'dart:convert'; // Import for JSON encoding and decoding
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._init();
@@ -97,6 +96,18 @@ class DatabaseHelper {
     );
   }
 
+  Future<bool> hasChildSubdetails(int parentId) async {
+    final db = await instance.database;
+
+    final result = await db.query(
+      'details',
+      where: 'parentId = ?',
+      whereArgs: [parentId],
+    );
+
+    return result.isNotEmpty;
+  }
+
   Future<int> deleteDetail(int id) async {
     final db = await instance.database;
 
@@ -105,6 +116,15 @@ class DatabaseHelper {
       where: 'id = ?',
       whereArgs: [id],
     );
+  }
+
+  Future<void> deleteDetailWithSubdetails(int id) async {
+    final subdetails = await readSubDetails(id);
+
+    for (final subdetail in subdetails) {
+      await deleteDetailWithSubdetails(subdetail.id!);
+    }
+    await deleteDetail(id);
   }
 
   Future<int> deleteSubDetails(int parentId) async {
@@ -128,7 +148,6 @@ class DatabaseHelper {
       final result = await db.query('details');
       return result.map((json) => Detail.fromMap(json)).toList();
     } catch (error) {
-      print('Error fetching details: $error');
       throw Exception('Failed to load details');
     }
   }

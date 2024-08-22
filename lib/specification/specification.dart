@@ -41,14 +41,14 @@ class _SpecificationState extends State<Specification> {
                     child: Column(
                       children: [
                         Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             border: Border(
                               right: BorderSide(width: 2.0, color: Colors.black), // Right border
                               bottom: BorderSide(width: 2.0, color: Colors.black), // Bottom border
                             ),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -67,12 +67,17 @@ class _SpecificationState extends State<Specification> {
                                     tooltip: 'Назад',
                                   ),
                                 Expanded(
-                                  child: Text(
-                                    state.selectedDetail == null
-                                        ? 'Список деталей'
-                                        : '${state.selectedDetail?.orderNumber} ${state.selectedDetail?.name}',
-                                    style: const TextStyle(fontSize: 18, color: Colors.black),
-                                    overflow: TextOverflow.clip,
+                                  child: Padding(
+                                    padding: state.selectedDetail == null
+                                        ? const EdgeInsets.only(left: 12.0)
+                                        : EdgeInsets.zero,
+                                    child: Text(
+                                      state.selectedDetail == null
+                                          ? 'Список деталей'
+                                          : '${state.selectedDetail?.orderNumber} ${state.selectedDetail?.name}',
+                                      style: const TextStyle(fontSize: 16, color: Colors.black),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
                                 ),
                                 if (state.selectedDetail != null)
@@ -149,7 +154,7 @@ class _SpecificationState extends State<Specification> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           border: Border(
                             bottom: BorderSide(width: 2.0, color: Colors.black), // Bottom border
                           ),
@@ -169,10 +174,10 @@ class _SpecificationState extends State<Specification> {
                         child: Expanded(
                           child: Scaffold(
                             appBar: const TabBar(
-                              labelColor: Colors.black45,
+                              unselectedLabelColor: Colors.black45,
                               tabs: [
                                 Tab(text: 'Чертёж'),
-                                Tab(text: 'Информация'),
+                                Tab(text: 'Заметки'),
                                 Tab(text: 'Фото'),
                               ],
                             ),
@@ -207,9 +212,11 @@ class _SpecificationState extends State<Specification> {
   Widget _buildDetailTile(BuildContext context, Detail detail) {
     final hasSubdetails = detail.subdetailIds.isNotEmpty;
     final tile = ListTile(
-      tileColor: _getBackgroundColor(detail.type),
+      tileColor: getBackgroundColor(detail.type),
       title: Text(
-        detail.parentId == null ? '${detail.orderNumber} ${detail.name}' : detail.name,
+        detail.parentId == null
+            ? '${detail.orderNumber} ${detail.name} - ${detail.quantity} шт.'
+            : '${detail.name} - ${detail.quantity} шт.',
       ),
       onTap: () {
         context.read<SpecificationBloc>().add(SpecificationEvent.selectDetail(detail.id!));
@@ -241,31 +248,36 @@ class _SpecificationState extends State<Specification> {
     }
   }
 
-  static Widget _buildTabContent(String? imagePath, String noDataText) {
+  Widget _buildTabContent(String? imagePath, String noDataText) {
     if (imagePath == null || imagePath.isEmpty) {
       return Center(
         child: Text(
           noDataText,
-          style: const TextStyle(color: Colors.white, fontSize: 18),
+          style: const TextStyle(color: Colors.black, fontSize: 18), // Adjusted to match typical text color
         ),
       );
     }
     final file = File(imagePath);
     if (!file.existsSync()) {
-      return Center(
+      return const Center(
         child: Text(
           'Image not found',
-          style: const TextStyle(color: Colors.white, fontSize: 18),
+          style: TextStyle(color: Colors.black, fontSize: 18), // Adjusted to match typical text color
         ),
       );
     }
 
-    return Expanded(
-      child: InteractiveViewer(
-        child: Image.file(file),
-        minScale: 0.1, // Minimum zoom scale
-        maxScale: 4.0, // Maximum zoom scale
-      ),
+    return GestureDetector(
+      onTap: () {
+        // Navigate to the full-screen image viewer
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => FullScreenImageViewer(imagePath: imagePath),
+          ),
+        );
+      },
+      child: Image.file(file),
     );
   }
 }
@@ -328,12 +340,13 @@ class __CommentTabState extends State<_CommentTab> {
                   controller: _commentController,
                   maxLines: null,
                   decoration: const InputDecoration(
-                    hintText: 'Впишите информацию о детали',
+                    hintText: 'Добавьте заметку...',
+                    hintStyle: TextStyle(color: Colors.black26),
                     border: OutlineInputBorder(),
                   ),
                 )
               : Text(
-                  _commentController.text.isEmpty ? 'Нет информации о детали' : _commentController.text,
+                  _commentController.text.isEmpty ? 'Нет заметок' : _commentController.text,
                   style: const TextStyle(fontSize: 18, color: Colors.black87),
                 ),
           const SizedBox(height: 16.0),
@@ -355,8 +368,8 @@ class __CommentTabState extends State<_CommentTab> {
               if (_isEditing)
                 ElevatedButton(
                   onPressed: () {
-                    _commentController.clear();
                     setState(() {
+                      _commentController.text = widget.initialComment ?? '';
                       _isEditing = false;
                     });
                   },
@@ -370,7 +383,7 @@ class __CommentTabState extends State<_CommentTab> {
   }
 }
 
-Color _getBackgroundColor(DetailType type) {
+Color getBackgroundColor(DetailType type) {
   switch (type) {
     case DetailType.circle:
       return const Color.fromARGB(60, 177, 78, 132);
@@ -382,5 +395,60 @@ Color _getBackgroundColor(DetailType type) {
       return const Color.fromARGB(60, 110, 57, 217);
     default:
       return Colors.transparent;
+  }
+}
+
+class FullScreenImageViewer extends StatelessWidget {
+  final String imagePath;
+
+  const FullScreenImageViewer({Key? key, required this.imagePath}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final file = File(imagePath);
+    if (!file.existsSync()) {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: const Text('Image Not Found'),
+        ),
+        body: const Center(
+          child: Text(
+            'Image not found',
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+        ),
+      );
+    }
+
+    return Scaffold(
+      backgroundColor: Colors.black, // Black background to make image viewing better
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: Center(
+        child: InteractiveViewer(
+          minScale: 0.1,
+          maxScale: 6.0,
+          clipBehavior: Clip.none,
+          child: Image.file(
+            file,
+            fit: BoxFit.contain,
+          ),
+        ),
+      ),
+    );
   }
 }

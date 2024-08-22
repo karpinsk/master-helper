@@ -1,13 +1,12 @@
-import 'dart:convert'; // Import for JSON encoding
-import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:slasher/database/database_helper.dart';
 import 'package:slasher/models/detail.dart';
+import 'package:slasher/specification/specification_bloc.dart';
 
 class DetailForm extends StatefulWidget {
-  final Detail? detail; // Pass a detail to edit it, otherwise create a new one
-
+  final Detail? detail;
   const DetailForm({Key? key, this.detail}) : super(key: key);
 
   @override
@@ -29,6 +28,7 @@ class _DetailFormState extends State<DetailForm> {
   final List<TextEditingController> _subdetailNameControllers = [];
   final List<TextEditingController> _subdetailQuantityControllers = [];
   final List<TextEditingController> _subdetailMainInfoController = [];
+  final List<TextEditingController> _subdetailCommentController = [];
   final List<String?> _subdetailDrawingImagePaths = [];
   final List<String?> _subdetailRegularImagePaths = [];
   final List<DetailType> _subdetailTypes = [];
@@ -63,6 +63,7 @@ class _DetailFormState extends State<DetailForm> {
     if (subdetail != null) {
       setState(() {
         _subdetailNameControllers.add(TextEditingController(text: subdetail.name));
+        _subdetailCommentController.add(TextEditingController(text: subdetail.comment.toString()));
         _subdetailQuantityControllers.add(TextEditingController(text: subdetail.quantity.toString()));
         _subdetailMainInfoController.add(TextEditingController(text: subdetail.mainInformation.toString()));
         _subdetailDrawingImagePaths.add(subdetail.drawingImagePath);
@@ -92,6 +93,39 @@ class _DetailFormState extends State<DetailForm> {
         }
       });
     }
+  }
+
+  Future<bool> _showDeleteConfirmationDialog(int index) async {
+    return await showDialog<bool>(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Подтверждение удаления'),
+              content: const Text('Вы уверены, что хотите удалить эту деталь вместе со всеми поддеталями?'),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Отмена'),
+                  onPressed: () {
+                    Navigator.of(context).pop(false); // Return false, don't delete
+                  },
+                ),
+                TextButton(
+                  child: const Text('Удалить'),
+                  onPressed: () {
+                    Navigator.of(context).pop(true); // Return true, delete
+                  },
+                ),
+              ],
+            );
+          },
+        ) ??
+        false; // Default to false if dialog is dismissed
+  }
+
+  Future<void> _deleteDetailAndSubdetails(int id) async {
+    final dbHelper = DatabaseHelper.instance;
+    await dbHelper.deleteDetailWithSubdetails(id);
+    context.read<SpecificationBloc>().add(const SpecificationEvent.loadDetails());
   }
 
   void _showImageSourceActionSheet(int index, bool isDrawing) {
@@ -129,23 +163,35 @@ class _DetailFormState extends State<DetailForm> {
       _subdetailNameControllers.add(TextEditingController());
       _subdetailQuantityControllers.add(TextEditingController());
       _subdetailMainInfoController.add(TextEditingController());
+      _subdetailCommentController.add(TextEditingController());
       _subdetailDrawingImagePaths.add(null);
       _subdetailRegularImagePaths.add(null);
       _subdetailTypes.add(DetailType.circle);
-      _subdetailIds.add(-1); // Placeholder for new subdetail IDs
+      _subdetailIds.add(-1);
     });
   }
 
   void _removeSubdetailFields(int index) async {
     final dbHelper = DatabaseHelper.instance;
 
-    // Check if this is an existing subdetail or a new one
     if (_subdetailIds[index] != -1) {
-      // Existing subdetails - Delete from the database
-      await dbHelper.deleteDetail(_subdetailIds[index]);
+      bool hasChildren = await dbHelper.hasChildSubdetails(_subdetailIds[index]);
+
+      if (hasChildren) {
+        bool shouldDelete = await _showDeleteConfirmationDialog(index);
+
+        if (!shouldDelete) {
+          return;
+        }
+      }
+
+      // Proceed with deletion if no children or user confirmed deletion
+      await _deleteDetailAndSubdetails(_subdetailIds[index]);
     }
 
+    // Remove subdetail fields from the UI
     setState(() {
+      _subdetailCommentController.removeAt(index);
       _subdetailNameControllers.removeAt(index);
       _subdetailQuantityControllers.removeAt(index);
       _subdetailMainInfoController.removeAt(index);
@@ -154,6 +200,15 @@ class _DetailFormState extends State<DetailForm> {
       _subdetailTypes.removeAt(index);
       _subdetailIds.removeAt(index);
     });
+  }
+
+  Future<void> _handleDeleteDetail(int id) async {
+    final shouldDelete = await _showDeleteConfirmationDialog(id);
+
+    if (shouldDelete) {
+      await _deleteDetailAndSubdetails(id);
+      Navigator.pop(context);
+    }
   }
 
   Future<void> _submitForm() async {
@@ -166,6 +221,7 @@ class _DetailFormState extends State<DetailForm> {
         name: _nameController.text,
         quantity: int.parse(_quantityController.text),
         mainInformation: _mainInfoController.text,
+        comment: widget.detail?.comment,
         type: _selectedType,
         createdAt: DateTime.now(),
         modifiedAt: DateTime.now(),
@@ -196,6 +252,7 @@ class _DetailFormState extends State<DetailForm> {
           name: _subdetailNameControllers[i].text,
           quantity: int.parse(_subdetailQuantityControllers[i].text),
           mainInformation: _subdetailMainInfoController[i].text,
+          comment: _subdetailCommentController[i].text,
           type: _subdetailTypes[i],
           createdAt: DateTime.now(),
           modifiedAt: DateTime.now(),
@@ -221,7 +278,7 @@ class _DetailFormState extends State<DetailForm> {
       await dbHelper.updateDetail(detail.copyWith(
           id: detailId, subdetailIds: updatedSubdetailIds.isEmpty ? [] : updatedSubdetailIds, parentId: parentId));
 
-      await dbHelper.getDetails();
+      context.read<SpecificationBloc>().add(const SpecificationEvent.loadDetails());
 
       Navigator.pop(context);
     }
@@ -396,6 +453,25 @@ class _DetailFormState extends State<DetailForm> {
                               ),
                             ),
                           ),
+                          if (widget.detail != null) // Show only when editing existing detail
+                            Expanded(
+                              child: ElevatedButton.icon(
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(3), // Set border radius to 3
+                                  ),
+                                  backgroundColor: const Color.fromARGB(255, 215, 152, 147),
+                                  minimumSize: Size.fromHeight(60),
+                                  side: BorderSide(
+                                    color: Theme.of(context).primaryColor, // Border color
+                                    width: 1.5, // Border width (adjust if needed)
+                                  ),
+                                ),
+                                onPressed: () => _handleDeleteDetail(widget.detail!.id!),
+                                icon: const Icon(Icons.delete),
+                                label: const Text('Удалить деталь'),
+                              ),
+                            ),
                         ],
                       ),
                       if (_drawingImagePath != null) Text('Чертёж детали успешно добавлен!'),

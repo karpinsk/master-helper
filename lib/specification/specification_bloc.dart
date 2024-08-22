@@ -1,4 +1,6 @@
 // specification_bloc.dart
+import 'dart:collection';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -81,7 +83,25 @@ class SpecificationBloc extends Bloc<SpecificationEvent, SpecificationState> {
       }
     }
 
-    return groupedDetails;
+    // Sort entries by year and month in descending order
+    List<MapEntry<String, List<Detail>>> sortedEntries = groupedDetails.entries.toList()
+      ..sort((a, b) {
+        // Extract month and year from the key
+        final aMonthIndex = russianMonthNames.indexOf(a.key.split(' ')[0]);
+        final aYear = int.parse(a.key.split(' ')[1]);
+
+        final bMonthIndex = russianMonthNames.indexOf(b.key.split(' ')[0]);
+        final bYear = int.parse(b.key.split(' ')[1]);
+
+        // Compare years first, then months in descending order
+        if (aYear != bYear) {
+          return bYear.compareTo(aYear);
+        }
+        return bMonthIndex.compareTo(aMonthIndex);
+      });
+
+    // Return as a LinkedHashMap to preserve insertion order
+    return LinkedHashMap<String, List<Detail>>.fromEntries(sortedEntries);
   }
 }
 

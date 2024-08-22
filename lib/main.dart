@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
         // Add other BlocProviders here if needed
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primaryColor: const Color(0xFF4682B4), // Steel Blue
           textTheme: const TextTheme(
