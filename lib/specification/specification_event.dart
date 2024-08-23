@@ -1,9 +1,8 @@
-// specification_event.dart
 part of 'specification_bloc.dart';
 
 @freezed
 class SpecificationEvent with _$SpecificationEvent {
-  const factory SpecificationEvent.loadDetails() = _LoadDetails;
-  const factory SpecificationEvent.selectDetail(int detailId) = _SelectDetail;
-  const factory SpecificationEvent.updateComment(int detailId, String? comment) = _UpdateComment;
+  const factory SpecificationEvent.detailsLoaded() = _DetailsLoaded;
+  const factory SpecificationEvent.detailSelected(int detailId) = _DetailSelected;
+  const factory SpecificationEvent.commentUpdated(int detailId, String? comment) = _CommentUpdated;
 }

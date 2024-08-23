@@ -18,10 +18,10 @@ class _SpecificationState extends State<Specification> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pop(context); // Pop the current page off the navigation stack
+          Navigator.pop(context);
         },
+        tooltip: 'Назад',
         child: const Icon(Icons.arrow_back),
-        tooltip: 'Go Back',
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       body: Padding(
@@ -43,8 +43,8 @@ class _SpecificationState extends State<Specification> {
                         Container(
                           decoration: const BoxDecoration(
                             border: Border(
-                              right: BorderSide(width: 2.0, color: Colors.black), // Right border
-                              bottom: BorderSide(width: 2.0, color: Colors.black), // Bottom border
+                              right: BorderSide(width: 2.0, color: Colors.black),
+                              bottom: BorderSide(width: 2.0, color: Colors.black),
                             ),
                           ),
                           child: Padding(
@@ -57,11 +57,11 @@ class _SpecificationState extends State<Specification> {
                                     icon: const Icon(Icons.arrow_back),
                                     onPressed: () {
                                       if (state.selectedDetail!.parentId == null) {
-                                        context.read<SpecificationBloc>().add(const SpecificationEvent.loadDetails());
+                                        context.read<SpecificationBloc>().add(const SpecificationEvent.detailsLoaded());
                                       } else {
                                         context
                                             .read<SpecificationBloc>()
-                                            .add(SpecificationEvent.selectDetail(state.selectedDetail!.parentId!));
+                                            .add(SpecificationEvent.detailSelected(state.selectedDetail!.parentId!));
                                       }
                                     },
                                     tooltip: 'Назад',
@@ -92,7 +92,7 @@ class _SpecificationState extends State<Specification> {
                                           ),
                                         ),
                                       ).then((_) {
-                                        context.read<SpecificationBloc>().add(SpecificationEvent.loadDetails());
+                                        context.read<SpecificationBloc>().add(const SpecificationEvent.detailsLoaded());
                                       });
                                     },
                                     tooltip: 'Редактировать',
@@ -105,7 +105,7 @@ class _SpecificationState extends State<Specification> {
                           child: Container(
                             decoration: const BoxDecoration(
                               border: Border(
-                                right: BorderSide(width: 2.0, color: Colors.black), // Right border
+                                right: BorderSide(width: 2.0, color: Colors.black),
                               ),
                             ),
                             child: ListView(
@@ -189,7 +189,7 @@ class _SpecificationState extends State<Specification> {
                                   onSave: (comment) {
                                     context
                                         .read<SpecificationBloc>()
-                                        .add(SpecificationEvent.updateComment(selectedDetail.id!, comment));
+                                        .add(SpecificationEvent.commentUpdated(selectedDetail.id!, comment));
                                   },
                                 ),
                                 _buildTabContent(selectedDetail.regularImagePath, 'Нет фото'),
@@ -219,7 +219,7 @@ class _SpecificationState extends State<Specification> {
             : '${detail.name} - ${detail.quantity} шт.',
       ),
       onTap: () {
-        context.read<SpecificationBloc>().add(SpecificationEvent.selectDetail(detail.id!));
+        context.read<SpecificationBloc>().add(SpecificationEvent.detailSelected(detail.id!));
       },
     );
 
@@ -243,7 +243,6 @@ class _SpecificationState extends State<Specification> {
         }).toList(),
       );
     } else {
-      // If there are no subdetails, return the ListTile
       return tile;
     }
   }
@@ -253,7 +252,7 @@ class _SpecificationState extends State<Specification> {
       return Center(
         child: Text(
           noDataText,
-          style: const TextStyle(color: Colors.black, fontSize: 18), // Adjusted to match typical text color
+          style: const TextStyle(color: Colors.black, fontSize: 18),
         ),
       );
     }
@@ -262,14 +261,13 @@ class _SpecificationState extends State<Specification> {
       return const Center(
         child: Text(
           'Image not found',
-          style: TextStyle(color: Colors.black, fontSize: 18), // Adjusted to match typical text color
+          style: TextStyle(color: Colors.black, fontSize: 18),
         ),
       );
     }
 
     return GestureDetector(
       onTap: () {
-        // Navigate to the full-screen image viewer
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -428,7 +426,7 @@ class FullScreenImageViewer extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: Colors.black, // Black background to make image viewing better
+      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: IconButton(

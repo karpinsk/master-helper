@@ -1,4 +1,3 @@
-// specification_state.dart
 part of 'specification_bloc.dart';
 
 @freezed

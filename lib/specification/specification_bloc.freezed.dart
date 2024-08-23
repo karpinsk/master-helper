@@ -18,45 +18,45 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SpecificationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadDetails,
-    required TResult Function(int detailId) selectDetail,
-    required TResult Function(int detailId, String? comment) updateComment,
+    required TResult Function() detailsLoaded,
+    required TResult Function(int detailId) detailSelected,
+    required TResult Function(int detailId, String? comment) commentUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadDetails,
-    TResult? Function(int detailId)? selectDetail,
-    TResult? Function(int detailId, String? comment)? updateComment,
+    TResult? Function()? detailsLoaded,
+    TResult? Function(int detailId)? detailSelected,
+    TResult? Function(int detailId, String? comment)? commentUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadDetails,
-    TResult Function(int detailId)? selectDetail,
-    TResult Function(int detailId, String? comment)? updateComment,
+    TResult Function()? detailsLoaded,
+    TResult Function(int detailId)? detailSelected,
+    TResult Function(int detailId, String? comment)? commentUpdated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoadDetails value) loadDetails,
-    required TResult Function(_SelectDetail value) selectDetail,
-    required TResult Function(_UpdateComment value) updateComment,
+    required TResult Function(_DetailsLoaded value) detailsLoaded,
+    required TResult Function(_DetailSelected value) detailSelected,
+    required TResult Function(_CommentUpdated value) commentUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadDetails value)? loadDetails,
-    TResult? Function(_SelectDetail value)? selectDetail,
-    TResult? Function(_UpdateComment value)? updateComment,
+    TResult? Function(_DetailsLoaded value)? detailsLoaded,
+    TResult? Function(_DetailSelected value)? detailSelected,
+    TResult? Function(_CommentUpdated value)? commentUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadDetails value)? loadDetails,
-    TResult Function(_SelectDetail value)? selectDetail,
-    TResult Function(_UpdateComment value)? updateComment,
+    TResult Function(_DetailsLoaded value)? detailsLoaded,
+    TResult Function(_DetailSelected value)? detailSelected,
+    TResult Function(_CommentUpdated value)? commentUpdated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -84,18 +84,18 @@ class _$SpecificationEventCopyWithImpl<$Res, $Val extends SpecificationEvent>
 }
 
 /// @nodoc
-abstract class _$$LoadDetailsImplCopyWith<$Res> {
-  factory _$$LoadDetailsImplCopyWith(
-          _$LoadDetailsImpl value, $Res Function(_$LoadDetailsImpl) then) =
-      __$$LoadDetailsImplCopyWithImpl<$Res>;
+abstract class _$$DetailsLoadedImplCopyWith<$Res> {
+  factory _$$DetailsLoadedImplCopyWith(
+          _$DetailsLoadedImpl value, $Res Function(_$DetailsLoadedImpl) then) =
+      __$$DetailsLoadedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadDetailsImplCopyWithImpl<$Res>
-    extends _$SpecificationEventCopyWithImpl<$Res, _$LoadDetailsImpl>
-    implements _$$LoadDetailsImplCopyWith<$Res> {
-  __$$LoadDetailsImplCopyWithImpl(
-      _$LoadDetailsImpl _value, $Res Function(_$LoadDetailsImpl) _then)
+class __$$DetailsLoadedImplCopyWithImpl<$Res>
+    extends _$SpecificationEventCopyWithImpl<$Res, _$DetailsLoadedImpl>
+    implements _$$DetailsLoadedImplCopyWith<$Res> {
+  __$$DetailsLoadedImplCopyWithImpl(
+      _$DetailsLoadedImpl _value, $Res Function(_$DetailsLoadedImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of SpecificationEvent
@@ -104,25 +104,27 @@ class __$$LoadDetailsImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadDetailsImpl with DiagnosticableTreeMixin implements _LoadDetails {
-  const _$LoadDetailsImpl();
+class _$DetailsLoadedImpl
+    with DiagnosticableTreeMixin
+    implements _DetailsLoaded {
+  const _$DetailsLoadedImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SpecificationEvent.loadDetails()';
+    return 'SpecificationEvent.detailsLoaded()';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-        .add(DiagnosticsProperty('type', 'SpecificationEvent.loadDetails'));
+        .add(DiagnosticsProperty('type', 'SpecificationEvent.detailsLoaded'));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadDetailsImpl);
+        (other.runtimeType == runtimeType && other is _$DetailsLoadedImpl);
   }
 
   @override
@@ -131,33 +133,33 @@ class _$LoadDetailsImpl with DiagnosticableTreeMixin implements _LoadDetails {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadDetails,
-    required TResult Function(int detailId) selectDetail,
-    required TResult Function(int detailId, String? comment) updateComment,
+    required TResult Function() detailsLoaded,
+    required TResult Function(int detailId) detailSelected,
+    required TResult Function(int detailId, String? comment) commentUpdated,
   }) {
-    return loadDetails();
+    return detailsLoaded();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadDetails,
-    TResult? Function(int detailId)? selectDetail,
-    TResult? Function(int detailId, String? comment)? updateComment,
+    TResult? Function()? detailsLoaded,
+    TResult? Function(int detailId)? detailSelected,
+    TResult? Function(int detailId, String? comment)? commentUpdated,
   }) {
-    return loadDetails?.call();
+    return detailsLoaded?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadDetails,
-    TResult Function(int detailId)? selectDetail,
-    TResult Function(int detailId, String? comment)? updateComment,
+    TResult Function()? detailsLoaded,
+    TResult Function(int detailId)? detailSelected,
+    TResult Function(int detailId, String? comment)? commentUpdated,
     required TResult orElse(),
   }) {
-    if (loadDetails != null) {
-      return loadDetails();
+    if (detailsLoaded != null) {
+      return detailsLoaded();
     }
     return orElse();
   }
@@ -165,57 +167,57 @@ class _$LoadDetailsImpl with DiagnosticableTreeMixin implements _LoadDetails {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoadDetails value) loadDetails,
-    required TResult Function(_SelectDetail value) selectDetail,
-    required TResult Function(_UpdateComment value) updateComment,
+    required TResult Function(_DetailsLoaded value) detailsLoaded,
+    required TResult Function(_DetailSelected value) detailSelected,
+    required TResult Function(_CommentUpdated value) commentUpdated,
   }) {
-    return loadDetails(this);
+    return detailsLoaded(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadDetails value)? loadDetails,
-    TResult? Function(_SelectDetail value)? selectDetail,
-    TResult? Function(_UpdateComment value)? updateComment,
+    TResult? Function(_DetailsLoaded value)? detailsLoaded,
+    TResult? Function(_DetailSelected value)? detailSelected,
+    TResult? Function(_CommentUpdated value)? commentUpdated,
   }) {
-    return loadDetails?.call(this);
+    return detailsLoaded?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadDetails value)? loadDetails,
-    TResult Function(_SelectDetail value)? selectDetail,
-    TResult Function(_UpdateComment value)? updateComment,
+    TResult Function(_DetailsLoaded value)? detailsLoaded,
+    TResult Function(_DetailSelected value)? detailSelected,
+    TResult Function(_CommentUpdated value)? commentUpdated,
     required TResult orElse(),
   }) {
-    if (loadDetails != null) {
-      return loadDetails(this);
+    if (detailsLoaded != null) {
+      return detailsLoaded(this);
     }
     return orElse();
   }
 }
 
-abstract class _LoadDetails implements SpecificationEvent {
-  const factory _LoadDetails() = _$LoadDetailsImpl;
+abstract class _DetailsLoaded implements SpecificationEvent {
+  const factory _DetailsLoaded() = _$DetailsLoadedImpl;
 }
 
 /// @nodoc
-abstract class _$$SelectDetailImplCopyWith<$Res> {
-  factory _$$SelectDetailImplCopyWith(
-          _$SelectDetailImpl value, $Res Function(_$SelectDetailImpl) then) =
-      __$$SelectDetailImplCopyWithImpl<$Res>;
+abstract class _$$DetailSelectedImplCopyWith<$Res> {
+  factory _$$DetailSelectedImplCopyWith(_$DetailSelectedImpl value,
+          $Res Function(_$DetailSelectedImpl) then) =
+      __$$DetailSelectedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int detailId});
 }
 
 /// @nodoc
-class __$$SelectDetailImplCopyWithImpl<$Res>
-    extends _$SpecificationEventCopyWithImpl<$Res, _$SelectDetailImpl>
-    implements _$$SelectDetailImplCopyWith<$Res> {
-  __$$SelectDetailImplCopyWithImpl(
-      _$SelectDetailImpl _value, $Res Function(_$SelectDetailImpl) _then)
+class __$$DetailSelectedImplCopyWithImpl<$Res>
+    extends _$SpecificationEventCopyWithImpl<$Res, _$DetailSelectedImpl>
+    implements _$$DetailSelectedImplCopyWith<$Res> {
+  __$$DetailSelectedImplCopyWithImpl(
+      _$DetailSelectedImpl _value, $Res Function(_$DetailSelectedImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of SpecificationEvent
@@ -225,7 +227,7 @@ class __$$SelectDetailImplCopyWithImpl<$Res>
   $Res call({
     Object? detailId = null,
   }) {
-    return _then(_$SelectDetailImpl(
+    return _then(_$DetailSelectedImpl(
       null == detailId
           ? _value.detailId
           : detailId // ignore: cast_nullable_to_non_nullable
@@ -236,22 +238,24 @@ class __$$SelectDetailImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SelectDetailImpl with DiagnosticableTreeMixin implements _SelectDetail {
-  const _$SelectDetailImpl(this.detailId);
+class _$DetailSelectedImpl
+    with DiagnosticableTreeMixin
+    implements _DetailSelected {
+  const _$DetailSelectedImpl(this.detailId);
 
   @override
   final int detailId;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SpecificationEvent.selectDetail(detailId: $detailId)';
+    return 'SpecificationEvent.detailSelected(detailId: $detailId)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'SpecificationEvent.selectDetail'))
+      ..add(DiagnosticsProperty('type', 'SpecificationEvent.detailSelected'))
       ..add(DiagnosticsProperty('detailId', detailId));
   }
 
@@ -259,7 +263,7 @@ class _$SelectDetailImpl with DiagnosticableTreeMixin implements _SelectDetail {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SelectDetailImpl &&
+            other is _$DetailSelectedImpl &&
             (identical(other.detailId, detailId) ||
                 other.detailId == detailId));
   }
@@ -272,39 +276,40 @@ class _$SelectDetailImpl with DiagnosticableTreeMixin implements _SelectDetail {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SelectDetailImplCopyWith<_$SelectDetailImpl> get copyWith =>
-      __$$SelectDetailImplCopyWithImpl<_$SelectDetailImpl>(this, _$identity);
+  _$$DetailSelectedImplCopyWith<_$DetailSelectedImpl> get copyWith =>
+      __$$DetailSelectedImplCopyWithImpl<_$DetailSelectedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadDetails,
-    required TResult Function(int detailId) selectDetail,
-    required TResult Function(int detailId, String? comment) updateComment,
+    required TResult Function() detailsLoaded,
+    required TResult Function(int detailId) detailSelected,
+    required TResult Function(int detailId, String? comment) commentUpdated,
   }) {
-    return selectDetail(detailId);
+    return detailSelected(detailId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadDetails,
-    TResult? Function(int detailId)? selectDetail,
-    TResult? Function(int detailId, String? comment)? updateComment,
+    TResult? Function()? detailsLoaded,
+    TResult? Function(int detailId)? detailSelected,
+    TResult? Function(int detailId, String? comment)? commentUpdated,
   }) {
-    return selectDetail?.call(detailId);
+    return detailSelected?.call(detailId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadDetails,
-    TResult Function(int detailId)? selectDetail,
-    TResult Function(int detailId, String? comment)? updateComment,
+    TResult Function()? detailsLoaded,
+    TResult Function(int detailId)? detailSelected,
+    TResult Function(int detailId, String? comment)? commentUpdated,
     required TResult orElse(),
   }) {
-    if (selectDetail != null) {
-      return selectDetail(detailId);
+    if (detailSelected != null) {
+      return detailSelected(detailId);
     }
     return orElse();
   }
@@ -312,65 +317,65 @@ class _$SelectDetailImpl with DiagnosticableTreeMixin implements _SelectDetail {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoadDetails value) loadDetails,
-    required TResult Function(_SelectDetail value) selectDetail,
-    required TResult Function(_UpdateComment value) updateComment,
+    required TResult Function(_DetailsLoaded value) detailsLoaded,
+    required TResult Function(_DetailSelected value) detailSelected,
+    required TResult Function(_CommentUpdated value) commentUpdated,
   }) {
-    return selectDetail(this);
+    return detailSelected(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadDetails value)? loadDetails,
-    TResult? Function(_SelectDetail value)? selectDetail,
-    TResult? Function(_UpdateComment value)? updateComment,
+    TResult? Function(_DetailsLoaded value)? detailsLoaded,
+    TResult? Function(_DetailSelected value)? detailSelected,
+    TResult? Function(_CommentUpdated value)? commentUpdated,
   }) {
-    return selectDetail?.call(this);
+    return detailSelected?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadDetails value)? loadDetails,
-    TResult Function(_SelectDetail value)? selectDetail,
-    TResult Function(_UpdateComment value)? updateComment,
+    TResult Function(_DetailsLoaded value)? detailsLoaded,
+    TResult Function(_DetailSelected value)? detailSelected,
+    TResult Function(_CommentUpdated value)? commentUpdated,
     required TResult orElse(),
   }) {
-    if (selectDetail != null) {
-      return selectDetail(this);
+    if (detailSelected != null) {
+      return detailSelected(this);
     }
     return orElse();
   }
 }
 
-abstract class _SelectDetail implements SpecificationEvent {
-  const factory _SelectDetail(final int detailId) = _$SelectDetailImpl;
+abstract class _DetailSelected implements SpecificationEvent {
+  const factory _DetailSelected(final int detailId) = _$DetailSelectedImpl;
 
   int get detailId;
 
   /// Create a copy of SpecificationEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SelectDetailImplCopyWith<_$SelectDetailImpl> get copyWith =>
+  _$$DetailSelectedImplCopyWith<_$DetailSelectedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UpdateCommentImplCopyWith<$Res> {
-  factory _$$UpdateCommentImplCopyWith(
-          _$UpdateCommentImpl value, $Res Function(_$UpdateCommentImpl) then) =
-      __$$UpdateCommentImplCopyWithImpl<$Res>;
+abstract class _$$CommentUpdatedImplCopyWith<$Res> {
+  factory _$$CommentUpdatedImplCopyWith(_$CommentUpdatedImpl value,
+          $Res Function(_$CommentUpdatedImpl) then) =
+      __$$CommentUpdatedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int detailId, String? comment});
 }
 
 /// @nodoc
-class __$$UpdateCommentImplCopyWithImpl<$Res>
-    extends _$SpecificationEventCopyWithImpl<$Res, _$UpdateCommentImpl>
-    implements _$$UpdateCommentImplCopyWith<$Res> {
-  __$$UpdateCommentImplCopyWithImpl(
-      _$UpdateCommentImpl _value, $Res Function(_$UpdateCommentImpl) _then)
+class __$$CommentUpdatedImplCopyWithImpl<$Res>
+    extends _$SpecificationEventCopyWithImpl<$Res, _$CommentUpdatedImpl>
+    implements _$$CommentUpdatedImplCopyWith<$Res> {
+  __$$CommentUpdatedImplCopyWithImpl(
+      _$CommentUpdatedImpl _value, $Res Function(_$CommentUpdatedImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of SpecificationEvent
@@ -381,7 +386,7 @@ class __$$UpdateCommentImplCopyWithImpl<$Res>
     Object? detailId = null,
     Object? comment = freezed,
   }) {
-    return _then(_$UpdateCommentImpl(
+    return _then(_$CommentUpdatedImpl(
       null == detailId
           ? _value.detailId
           : detailId // ignore: cast_nullable_to_non_nullable
@@ -396,10 +401,10 @@ class __$$UpdateCommentImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateCommentImpl
+class _$CommentUpdatedImpl
     with DiagnosticableTreeMixin
-    implements _UpdateComment {
-  const _$UpdateCommentImpl(this.detailId, this.comment);
+    implements _CommentUpdated {
+  const _$CommentUpdatedImpl(this.detailId, this.comment);
 
   @override
   final int detailId;
@@ -408,14 +413,14 @@ class _$UpdateCommentImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SpecificationEvent.updateComment(detailId: $detailId, comment: $comment)';
+    return 'SpecificationEvent.commentUpdated(detailId: $detailId, comment: $comment)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'SpecificationEvent.updateComment'))
+      ..add(DiagnosticsProperty('type', 'SpecificationEvent.commentUpdated'))
       ..add(DiagnosticsProperty('detailId', detailId))
       ..add(DiagnosticsProperty('comment', comment));
   }
@@ -424,7 +429,7 @@ class _$UpdateCommentImpl
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdateCommentImpl &&
+            other is _$CommentUpdatedImpl &&
             (identical(other.detailId, detailId) ||
                 other.detailId == detailId) &&
             (identical(other.comment, comment) || other.comment == comment));
@@ -438,39 +443,40 @@ class _$UpdateCommentImpl
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UpdateCommentImplCopyWith<_$UpdateCommentImpl> get copyWith =>
-      __$$UpdateCommentImplCopyWithImpl<_$UpdateCommentImpl>(this, _$identity);
+  _$$CommentUpdatedImplCopyWith<_$CommentUpdatedImpl> get copyWith =>
+      __$$CommentUpdatedImplCopyWithImpl<_$CommentUpdatedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadDetails,
-    required TResult Function(int detailId) selectDetail,
-    required TResult Function(int detailId, String? comment) updateComment,
+    required TResult Function() detailsLoaded,
+    required TResult Function(int detailId) detailSelected,
+    required TResult Function(int detailId, String? comment) commentUpdated,
   }) {
-    return updateComment(detailId, comment);
+    return commentUpdated(detailId, comment);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadDetails,
-    TResult? Function(int detailId)? selectDetail,
-    TResult? Function(int detailId, String? comment)? updateComment,
+    TResult? Function()? detailsLoaded,
+    TResult? Function(int detailId)? detailSelected,
+    TResult? Function(int detailId, String? comment)? commentUpdated,
   }) {
-    return updateComment?.call(detailId, comment);
+    return commentUpdated?.call(detailId, comment);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadDetails,
-    TResult Function(int detailId)? selectDetail,
-    TResult Function(int detailId, String? comment)? updateComment,
+    TResult Function()? detailsLoaded,
+    TResult Function(int detailId)? detailSelected,
+    TResult Function(int detailId, String? comment)? commentUpdated,
     required TResult orElse(),
   }) {
-    if (updateComment != null) {
-      return updateComment(detailId, comment);
+    if (commentUpdated != null) {
+      return commentUpdated(detailId, comment);
     }
     return orElse();
   }
@@ -478,41 +484,41 @@ class _$UpdateCommentImpl
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoadDetails value) loadDetails,
-    required TResult Function(_SelectDetail value) selectDetail,
-    required TResult Function(_UpdateComment value) updateComment,
+    required TResult Function(_DetailsLoaded value) detailsLoaded,
+    required TResult Function(_DetailSelected value) detailSelected,
+    required TResult Function(_CommentUpdated value) commentUpdated,
   }) {
-    return updateComment(this);
+    return commentUpdated(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadDetails value)? loadDetails,
-    TResult? Function(_SelectDetail value)? selectDetail,
-    TResult? Function(_UpdateComment value)? updateComment,
+    TResult? Function(_DetailsLoaded value)? detailsLoaded,
+    TResult? Function(_DetailSelected value)? detailSelected,
+    TResult? Function(_CommentUpdated value)? commentUpdated,
   }) {
-    return updateComment?.call(this);
+    return commentUpdated?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadDetails value)? loadDetails,
-    TResult Function(_SelectDetail value)? selectDetail,
-    TResult Function(_UpdateComment value)? updateComment,
+    TResult Function(_DetailsLoaded value)? detailsLoaded,
+    TResult Function(_DetailSelected value)? detailSelected,
+    TResult Function(_CommentUpdated value)? commentUpdated,
     required TResult orElse(),
   }) {
-    if (updateComment != null) {
-      return updateComment(this);
+    if (commentUpdated != null) {
+      return commentUpdated(this);
     }
     return orElse();
   }
 }
 
-abstract class _UpdateComment implements SpecificationEvent {
-  const factory _UpdateComment(final int detailId, final String? comment) =
-      _$UpdateCommentImpl;
+abstract class _CommentUpdated implements SpecificationEvent {
+  const factory _CommentUpdated(final int detailId, final String? comment) =
+      _$CommentUpdatedImpl;
 
   int get detailId;
   String? get comment;
@@ -520,7 +526,7 @@ abstract class _UpdateComment implements SpecificationEvent {
   /// Create a copy of SpecificationEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateCommentImplCopyWith<_$UpdateCommentImpl> get copyWith =>
+  _$$CommentUpdatedImplCopyWith<_$CommentUpdatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
