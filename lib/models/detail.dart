@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-enum DetailType { circle, cutting, casting, rubber, none }
+import 'package:slasher/models/detail_type.dart';
 
 class Detail {
   int? id;
@@ -16,7 +16,7 @@ class Detail {
   int? parentId;
   String? drawingImagePath;
   String? regularImagePath;
-  List<int> subdetailIds; // List to store IDs of subdetails
+  List<int> subDetailIds;
 
   Detail({
     this.id,
@@ -32,8 +32,8 @@ class Detail {
     this.parentId,
     this.drawingImagePath,
     this.regularImagePath,
-    List<int>? subdetailIds,
-  }) : subdetailIds = subdetailIds ?? [];
+    List<int>? subDetailIds,
+  }) : subDetailIds = subDetailIds ?? [];
 
   static Detail fromJson(Map<String, dynamic> json) {
     return Detail(
@@ -50,7 +50,7 @@ class Detail {
       parentId: json['parentId'],
       drawingImagePath: json['drawingImagePath'],
       regularImagePath: json['regularImagePath'],
-      subdetailIds: (json['subdetailIds'] as List<dynamic>?)?.map((e) => e as int).toList(), // Handle the list of IDs
+      subDetailIds: (json['subDetailIds'] as List<dynamic>?)?.map((e) => e as int).toList(),
     );
   }
 
@@ -69,7 +69,7 @@ class Detail {
       'parentId': parentId,
       'drawingImagePath': drawingImagePath,
       'regularImagePath': regularImagePath,
-      'subdetailIds': jsonEncode(subdetailIds), // Save the list of IDs
+      'subDetailIds': jsonEncode(subDetailIds), // Save the list of IDs
     };
   }
 
@@ -88,8 +88,8 @@ class Detail {
       parentId: map['parentId'],
       drawingImagePath: map['drawingImagePath'],
       regularImagePath: map['regularImagePath'],
-      subdetailIds: map['subdetailIds'] != null && map['subdetailIds'].isNotEmpty
-          ? (jsonDecode(map['subdetailIds']) as List<dynamic>).map((e) => e as int).toList()
+      subDetailIds: map['subDetailIds'] != null && map['subDetailIds'].isNotEmpty
+          ? (jsonDecode(map['subDetailIds']) as List<dynamic>).map((e) => e as int).toList()
           : [],
     );
   }
@@ -108,7 +108,7 @@ class Detail {
     int? parentId,
     String? drawingImagePath,
     String? regularImagePath,
-    List<int>? subdetailIds, // Allow copying with a new list of IDs
+    List<int>? subDetailIds, // Allow copying with a new list of IDs
   }) {
     return Detail(
       id: id ?? this.id,
@@ -124,7 +124,7 @@ class Detail {
       parentId: parentId ?? this.parentId,
       drawingImagePath: drawingImagePath ?? this.drawingImagePath,
       regularImagePath: regularImagePath ?? this.regularImagePath,
-      subdetailIds: subdetailIds ?? this.subdetailIds, // Copy the list of IDs
+      subDetailIds: subDetailIds ?? this.subDetailIds, // Copy the list of IDs
     );
   }
 }

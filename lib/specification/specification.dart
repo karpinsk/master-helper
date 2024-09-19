@@ -1,9 +1,11 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slasher/add-detail/addDetail.dart';
+import 'package:slasher/add_detail/detail_form_view.dart';
 import 'package:slasher/models/detail.dart';
 import 'package:slasher/specification/specification_bloc.dart';
+import 'package:slasher/specification/widgets/comment_field.dart';
+import 'package:slasher/specification/widgets/detail_tile.dart';
+import 'package:slasher/specification/widgets/image_field.dart';
 
 class Specification extends StatefulWidget {
   const Specification({super.key});
@@ -15,18 +17,17 @@ class Specification extends StatefulWidget {
 class _SpecificationState extends State<Specification> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        tooltip: 'Назад',
-        child: const Icon(Icons.arrow_back),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      body: Padding(
-        padding: const EdgeInsets.only(top: 20),
-        child: Row(
+    return SafeArea(
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          tooltip: 'Назад',
+          child: const Icon(Icons.arrow_back),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+        body: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             BlocBuilder<SpecificationBloc, SpecificationState>(
@@ -183,8 +184,8 @@ class _SpecificationState extends State<Specification> {
                             ),
                             body: TabBarView(
                               children: [
-                                _buildTabContent(selectedDetail.drawingImagePath, 'Нет чертежа'),
-                                _CommentTab(
+                                ImageField(imagePath: selectedDetail.drawingImagePath),
+                                CommentField(
                                   initialComment: selectedDetail.comment,
                                   onSave: (comment) {
                                     context
@@ -192,7 +193,7 @@ class _SpecificationState extends State<Specification> {
                                         .add(SpecificationEvent.commentUpdated(selectedDetail.id!, comment));
                                   },
                                 ),
-                                _buildTabContent(selectedDetail.regularImagePath, 'Нет фото'),
+                                ImageField(imagePath: selectedDetail.regularImagePath),
                               ],
                             ),
                           ),
@@ -210,73 +211,31 @@ class _SpecificationState extends State<Specification> {
   }
 
   Widget _buildDetailTile(BuildContext context, Detail detail) {
-    final hasSubdetails = detail.subdetailIds.isNotEmpty;
-    final tile = ListTile(
-      tileColor: getBackgroundColor(detail.type),
-      title: Text(
-        detail.parentId == null
-            ? '${detail.orderNumber} ${detail.name} - ${detail.quantity} шт.'
-            : '${detail.name} - ${detail.quantity} шт.',
-      ),
-      onTap: () {
-        context.read<SpecificationBloc>().add(SpecificationEvent.detailSelected(detail.id!));
-      },
+    final tileHeader = DetailTile(
+      onTap: () => context.read<SpecificationBloc>().add(SpecificationEvent.detailSelected(detail.id!)),
+      detail: detail,
     );
 
-    if (detail.parentId == null) {
-      return tile;
-    } else if (hasSubdetails) {
+    if (detail.parentId != null && detail.subDetailIds.isNotEmpty) {
       return ExpansionTile(
-        title: tile,
+        title: tileHeader,
         tilePadding: EdgeInsets.all(0),
         initiallyExpanded: true,
         childrenPadding: EdgeInsets.only(left: 12),
-        children: detail.subdetailIds.map((subdetailId) {
-          final subdetail = context
+        children: detail.subDetailIds.map((subDetailId) {
+          final subDetail = context
               .read<SpecificationBloc>()
               .state
               .detailsByMonth
               .values
               .expand((details) => details)
-              .firstWhere((d) => d.id == subdetailId);
-          return _buildDetailTile(context, subdetail);
+              .firstWhere((d) => d.id == subDetailId);
+          return _buildDetailTile(context, subDetail);
         }).toList(),
       );
     } else {
-      return tile;
+      return tileHeader;
     }
-  }
-
-  Widget _buildTabContent(String? imagePath, String noDataText) {
-    if (imagePath == null || imagePath.isEmpty) {
-      return Center(
-        child: Text(
-          noDataText,
-          style: const TextStyle(color: Colors.black, fontSize: 18),
-        ),
-      );
-    }
-    final file = File(imagePath);
-    if (!file.existsSync()) {
-      return const Center(
-        child: Text(
-          'Image not found',
-          style: TextStyle(color: Colors.black, fontSize: 18),
-        ),
-      );
-    }
-
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => FullScreenImageViewer(imagePath: imagePath),
-          ),
-        );
-      },
-      child: Image.file(file),
-    );
   }
 }
 
@@ -327,124 +286,56 @@ class __CommentTabState extends State<_CommentTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _isEditing
-              ? TextField(
-                  controller: _commentController,
-                  maxLines: null,
-                  decoration: const InputDecoration(
-                    hintText: 'Добавьте заметку...',
-                    hintStyle: TextStyle(color: Colors.black26),
-                    border: OutlineInputBorder(),
-                  ),
-                )
-              : Text(
-                  _commentController.text.isEmpty ? 'Нет заметок' : _commentController.text,
-                  style: const TextStyle(fontSize: 18, color: Colors.black87),
-                ),
-          const SizedBox(height: 16.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              _isEditing
-                  ? ElevatedButton(
-                      onPressed: _saveComment,
-                      child: const Text('Сохранить'),
-                    )
-                  : ElevatedButton(
-                      onPressed: () => setState(() {
-                        _isEditing = true;
-                      }),
-                      child: const Text('Изменить'),
+    return SingleChildScrollView(
+      child: Container(
+        color: Colors.white,
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _isEditing
+                ? TextField(
+                    controller: _commentController,
+                    maxLines: null,
+                    decoration: const InputDecoration(
+                      hintText: 'Добавьте заметку...',
+                      hintStyle: TextStyle(color: Colors.black26),
+                      border: OutlineInputBorder(),
                     ),
-              if (_isEditing) const SizedBox(width: 8.0),
-              if (_isEditing)
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      _commentController.text = widget.initialComment ?? '';
-                      _isEditing = false;
-                    });
-                  },
-                  child: const Text('Отмена'),
-                ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-Color getBackgroundColor(DetailType type) {
-  switch (type) {
-    case DetailType.circle:
-      return const Color.fromARGB(60, 177, 78, 132);
-    case DetailType.casting:
-      return const Color.fromARGB(60, 227, 158, 33);
-    case DetailType.cutting:
-      return const Color.fromARGB(60, 0, 136, 123);
-    case DetailType.rubber:
-      return const Color.fromARGB(60, 110, 57, 217);
-    default:
-      return Colors.transparent;
-  }
-}
-
-class FullScreenImageViewer extends StatelessWidget {
-  final String imagePath;
-
-  const FullScreenImageViewer({Key? key, required this.imagePath}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final file = File(imagePath);
-    if (!file.existsSync()) {
-      return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          title: const Text('Image Not Found'),
-        ),
-        body: const Center(
-          child: Text(
-            'Image not found',
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-        ),
-      );
-    }
-
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-      body: Center(
-        child: InteractiveViewer(
-          minScale: 0.1,
-          maxScale: 6.0,
-          clipBehavior: Clip.none,
-          child: Image.file(
-            file,
-            fit: BoxFit.contain,
-          ),
+                  )
+                : Text(
+                    _commentController.text.isEmpty ? 'Нет заметок' : _commentController.text,
+                    style: const TextStyle(fontSize: 18, color: Colors.black87),
+                  ),
+            const SizedBox(height: 16.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _isEditing
+                    ? ElevatedButton(
+                        onPressed: _saveComment,
+                        child: const Text('Сохранить'),
+                      )
+                    : ElevatedButton(
+                        onPressed: () => setState(() {
+                          _isEditing = true;
+                        }),
+                        child: const Text('Изменить'),
+                      ),
+                if (_isEditing) const SizedBox(width: 8.0),
+                if (_isEditing)
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _commentController.text = widget.initialComment ?? '';
+                        _isEditing = false;
+                      });
+                    },
+                    child: const Text('Отмена'),
+                  ),
+              ],
+            ),
+          ],
         ),
       ),
     );

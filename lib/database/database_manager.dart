@@ -2,12 +2,12 @@ import 'package:slasher/models/detail.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-class DatabaseHelper {
-  static final DatabaseHelper instance = DatabaseHelper._init();
+class DatabaseManager {
+  static final DatabaseManager instance = DatabaseManager._init();
 
   static Database? _database;
 
-  DatabaseHelper._init();
+  DatabaseManager._init();
 
   Future<Database> get database async {
     if (_database != null) return _database!;
@@ -22,7 +22,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 1, // Initial version
+      version: 1,
       onCreate: _createDB,
     );
   }
@@ -43,7 +43,7 @@ class DatabaseHelper {
     comment TEXT,
     drawingImagePath TEXT,
     regularImagePath TEXT,
-    subdetailIds TEXT
+    subDetailIds TEXT
   )
   ''';
 
@@ -71,18 +71,6 @@ class DatabaseHelper {
     }
   }
 
-  Future<List<Detail>> readSubDetails(int parentId) async {
-    final db = await instance.database;
-
-    final maps = await db.query(
-      'details',
-      where: 'parentId = ?',
-      whereArgs: [parentId],
-    );
-
-    return maps.map((map) => Detail.fromMap(map)).toList();
-  }
-
   Future<int> updateDetail(Detail detail) async {
     final db = await instance.database;
 
@@ -96,7 +84,7 @@ class DatabaseHelper {
     );
   }
 
-  Future<bool> hasChildSubdetails(int parentId) async {
+  Future<bool> hasSubDetails(int parentId) async {
     final db = await instance.database;
 
     final result = await db.query(
@@ -108,23 +96,26 @@ class DatabaseHelper {
     return result.isNotEmpty;
   }
 
-  Future<int> deleteDetail(int id) async {
-    final db = await instance.database;
+  Future<void> deleteDetail(int id) async {
+    final db = await database;
 
-    return await db.delete(
+    final maps = await db.query(
+      'details',
+      where: 'parentId = ?',
+      whereArgs: [id],
+    );
+
+    final subDetails = maps.map((map) => Detail.fromMap(map)).toList();
+
+    for (final subDetail in subDetails) {
+      await deleteDetail(subDetail.id!);
+    }
+
+    await db.delete(
       'details',
       where: 'id = ?',
       whereArgs: [id],
     );
-  }
-
-  Future<void> deleteDetailWithSubdetails(int id) async {
-    final subdetails = await readSubDetails(id);
-
-    for (final subdetail in subdetails) {
-      await deleteDetailWithSubdetails(subdetail.id!);
-    }
-    await deleteDetail(id);
   }
 
   Future<int> deleteSubDetails(int parentId) async {

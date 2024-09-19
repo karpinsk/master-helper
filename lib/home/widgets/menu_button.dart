@@ -28,7 +28,7 @@ class MenuButton extends StatelessWidget {
         },
         child: Text(
           text,
-          style: const TextStyle(fontSize: 28, color: Colors.white), // Adjust font size as needed
+          style: const TextStyle(fontSize: 28, color: Colors.white),
         ),
       ),
     );
