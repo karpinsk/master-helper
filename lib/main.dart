@@ -38,9 +38,7 @@ class MyApp extends StatelessWidget {
             textTheme: ButtonTextTheme.primary,
           ),
           colorScheme: ColorScheme.fromSwatch().copyWith(
-            secondary: const Color(0xFFFFA500), // Orange
             error: const Color(0xFFDC3545), // Red
-            onError: const Color(0xFFFFFFFF), // White for error text
             primary: const Color(0xFF4682B4), // Steel Blue
           ),
         ),

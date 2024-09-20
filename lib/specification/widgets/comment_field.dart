@@ -62,7 +62,7 @@ class _CommentFieldState extends State<CommentField> {
                   )
                 : Text(
                     _commentController.text.isEmpty ? 'Нет заметок' : _commentController.text,
-                    style: const TextStyle(fontSize: 18, color: Colors.black87),
+                    style: const TextStyle(fontSize: 18, color: Colors.black),
                   ),
             const SizedBox(height: 16.0),
             Row(

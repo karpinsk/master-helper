@@ -14,7 +14,7 @@ class DetailTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      tileColor: detail.type.getBackgroundColor(detail.type),
+      tileColor: detail.type.color,
       title: Text(
         detail.parentId == null
             ? '${detail.orderNumber} ${detail.name} - ${detail.quantity} шт.'

@@ -44,8 +44,8 @@ class SettingsScreen extends StatelessWidget {
       for (var type in detailTypes)
         TableRow(
           children: [
-            _buildTableCell(type.getDetailTypeName(type)),
-            _buildTableCellContainer(type.getBackgroundColor(type)),
+            _buildTableCell(type.name),
+            _buildTableCellContainer(type.color),
           ],
         ),
     ];

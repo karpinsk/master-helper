@@ -69,7 +69,7 @@ class Detail {
       'parentId': parentId,
       'drawingImagePath': drawingImagePath,
       'regularImagePath': regularImagePath,
-      'subDetailIds': jsonEncode(subDetailIds), // Save the list of IDs
+      'subDetailIds': jsonEncode(subDetailIds),
     };
   }
 
@@ -108,7 +108,7 @@ class Detail {
     int? parentId,
     String? drawingImagePath,
     String? regularImagePath,
-    List<int>? subDetailIds, // Allow copying with a new list of IDs
+    List<int>? subDetailIds,
   }) {
     return Detail(
       id: id ?? this.id,
@@ -124,7 +124,7 @@ class Detail {
       parentId: parentId ?? this.parentId,
       drawingImagePath: drawingImagePath ?? this.drawingImagePath,
       regularImagePath: regularImagePath ?? this.regularImagePath,
-      subDetailIds: subDetailIds ?? this.subDetailIds, // Copy the list of IDs
+      subDetailIds: subDetailIds ?? this.subDetailIds,
     );
   }
 }

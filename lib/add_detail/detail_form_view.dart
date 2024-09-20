@@ -387,7 +387,7 @@ class _DetailFormState extends State<DetailForm> {
                             items: DetailType.values.map((DetailType type) {
                               return DropdownMenuItem<DetailType>(
                                 value: type,
-                                child: Text(type.getDetailTypeName(type)),
+                                child: Text(type.name),
                               );
                             }).toList(),
                             onChanged: (DetailType? newValue) {
@@ -555,7 +555,7 @@ class _DetailFormState extends State<DetailForm> {
                                           items: DetailType.values.map((DetailType type) {
                                             return DropdownMenuItem<DetailType>(
                                               value: type,
-                                              child: Text(type.getDetailTypeName(type)),
+                                              child: Text(type.name),
                                             );
                                           }).toList(),
                                           onChanged: (DetailType? newValue) {

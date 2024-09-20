@@ -11,7 +11,7 @@ class ImageField extends StatelessWidget {
     if (imagePath == null) {
       return const Center(
         child: Text(
-          'Image not found',
+          'Фото не добавлено',
           style: TextStyle(color: Colors.black, fontSize: 18),
         ),
       );
@@ -21,7 +21,7 @@ class ImageField extends StatelessWidget {
     if (!file.existsSync()) {
       return const Center(
         child: Text(
-          'Image not found',
+          'Фото не найдено',
           style: TextStyle(color: Colors.black, fontSize: 18),
         ),
       );

@@ -11,7 +11,7 @@ class Specification extends StatefulWidget {
   const Specification({super.key});
 
   @override
-  _SpecificationState createState() => _SpecificationState();
+  State<Specification> createState() => _SpecificationState();
 }
 
 class _SpecificationState extends State<Specification> {
@@ -38,7 +38,7 @@ class _SpecificationState extends State<Specification> {
                   return const Center(child: Text('Error loading details'));
                 } else {
                   return Expanded(
-                    flex: 3,
+                    flex: 5,
                     child: Column(
                       children: [
                         Container(
@@ -138,7 +138,7 @@ class _SpecificationState extends State<Specification> {
               },
             ),
             Expanded(
-              flex: 7,
+              flex: 5,
               child: BlocBuilder<SpecificationBloc, SpecificationState>(
                 builder: (context, state) {
                   if (state.selectedDetail == null) {
@@ -175,7 +175,7 @@ class _SpecificationState extends State<Specification> {
                         child: Expanded(
                           child: Scaffold(
                             appBar: const TabBar(
-                              unselectedLabelColor: Colors.black45,
+                              unselectedLabelColor: Colors.black26,
                               tabs: [
                                 Tab(text: 'Чертёж'),
                                 Tab(text: 'Заметки'),
@@ -219,9 +219,9 @@ class _SpecificationState extends State<Specification> {
     if (detail.parentId != null && detail.subDetailIds.isNotEmpty) {
       return ExpansionTile(
         title: tileHeader,
-        tilePadding: EdgeInsets.all(0),
+        tilePadding: const EdgeInsets.all(0),
         initiallyExpanded: true,
-        childrenPadding: EdgeInsets.only(left: 12),
+        childrenPadding: const EdgeInsets.only(left: 12),
         children: detail.subDetailIds.map((subDetailId) {
           final subDetail = context
               .read<SpecificationBloc>()
@@ -236,108 +236,5 @@ class _SpecificationState extends State<Specification> {
     } else {
       return tileHeader;
     }
-  }
-}
-
-class _CommentTab extends StatefulWidget {
-  final String? initialComment;
-  final void Function(String comment) onSave;
-
-  const _CommentTab({
-    Key? key,
-    this.initialComment,
-    required this.onSave,
-  }) : super(key: key);
-
-  @override
-  __CommentTabState createState() => __CommentTabState();
-}
-
-class __CommentTabState extends State<_CommentTab> {
-  late TextEditingController _commentController;
-  bool _isEditing = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _commentController = TextEditingController(text: widget.initialComment);
-  }
-
-  @override
-  void didUpdateWidget(covariant _CommentTab oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.initialComment != oldWidget.initialComment) {
-      _commentController.text = widget.initialComment ?? '';
-    }
-  }
-
-  @override
-  void dispose() {
-    _commentController.dispose();
-    super.dispose();
-  }
-
-  void _saveComment() {
-    widget.onSave(_commentController.text);
-    setState(() {
-      _isEditing = false;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        color: Colors.white,
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _isEditing
-                ? TextField(
-                    controller: _commentController,
-                    maxLines: null,
-                    decoration: const InputDecoration(
-                      hintText: 'Добавьте заметку...',
-                      hintStyle: TextStyle(color: Colors.black26),
-                      border: OutlineInputBorder(),
-                    ),
-                  )
-                : Text(
-                    _commentController.text.isEmpty ? 'Нет заметок' : _commentController.text,
-                    style: const TextStyle(fontSize: 18, color: Colors.black87),
-                  ),
-            const SizedBox(height: 16.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                _isEditing
-                    ? ElevatedButton(
-                        onPressed: _saveComment,
-                        child: const Text('Сохранить'),
-                      )
-                    : ElevatedButton(
-                        onPressed: () => setState(() {
-                          _isEditing = true;
-                        }),
-                        child: const Text('Изменить'),
-                      ),
-                if (_isEditing) const SizedBox(width: 8.0),
-                if (_isEditing)
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        _commentController.text = widget.initialComment ?? '';
-                        _isEditing = false;
-                      });
-                    },
-                    child: const Text('Отмена'),
-                  ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }
