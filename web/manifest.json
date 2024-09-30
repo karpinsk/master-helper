@@ -1,6 +1,6 @@
 {
-    "name": "slasher",
-    "short_name": "slasher",
+    "name": "master_helper",
+    "short_name": "master_helper",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

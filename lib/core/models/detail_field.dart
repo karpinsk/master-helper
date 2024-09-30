@@ -1,0 +1,17 @@
+enum DetailField {
+  id,
+  info,
+  comment,
+  techProcess,
+  orderNumber,
+  name,
+  type,
+  status,
+  createdAt,
+  modifiedAt,
+  parentId,
+  drawingPath,
+  drawingExpirationDate,
+  photoPath,
+  subDetailIds,
+}
