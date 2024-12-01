@@ -11,6 +11,7 @@ import 'package:master_helper/features/detail_form/widgets/dashed_divider.dart';
 import 'package:master_helper/features/detail_form/widgets/detail_action_buttons.dart';
 import 'package:master_helper/features/detail_form/widgets/delete_confirmation_dialog.dart';
 import 'package:master_helper/core/models/detail_field.dart';
+import 'package:master_helper/features/specification/specification_page.dart';
 import 'package:master_helper/generated/l10n.dart';
 import 'package:master_helper/features/home/home.dart';
 import 'package:toastification/toastification.dart';
@@ -123,6 +124,14 @@ class DetailFormSection extends StatelessWidget {
                     }
                   } else {
                     bloc.add(DetailFormEvent.deleteButtonTapped(detailId: detailDto.id!));
+                    if (detailDto.parentId != null) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SpecificationPage(),
+                        ),
+                      );
+                    }
                   }
                 },
               );

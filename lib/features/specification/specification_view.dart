@@ -180,7 +180,7 @@ class SpecificationView extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           child: Text(
-                            '${selectedDetail.orderNumber} ${selectedDetail.name} ${selectedDetail.info}',
+                            '${selectedDetail.orderNumber} ${selectedDetail.name} ${selectedDetail.info ?? ''}',
                             style: const TextStyle(fontSize: 24),
                             overflow: TextOverflow.clip,
                           ),
