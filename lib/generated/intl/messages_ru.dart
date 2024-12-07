@@ -77,6 +77,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Срок годности чертежа"),
         "drawingExpired": MessageLookupByLibrary.simpleMessage(
             "Чертёж детали просрочен. Необходимо продлить чертёж"),
+        "drawingRemoved":
+            MessageLookupByLibrary.simpleMessage("Drawing removed"),
         "drawingSoonExpiring": MessageLookupByLibrary.simpleMessage(
             "До истечения чертежа осталось менее 10 дней"),
         "edit": MessageLookupByLibrary.simpleMessage("Редактировать"),
@@ -101,13 +103,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "noNotes": MessageLookupByLibrary.simpleMessage("Нет заметок"),
         "none": MessageLookupByLibrary.simpleMessage("---"),
         "notes": MessageLookupByLibrary.simpleMessage("Заметки"),
+        "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "orderNumber": MessageLookupByLibrary.simpleMessage("Номер заказа"),
         "photo": MessageLookupByLibrary.simpleMessage("Фото"),
         "photoAdded": MessageLookupByLibrary.simpleMessage(
             "Фото детали успешно добавлено!"),
+        "photoRemoved": MessageLookupByLibrary.simpleMessage("Photo removed"),
+        "removeDrawing": MessageLookupByLibrary.simpleMessage("Чертёж удалён"),
+        "removePhoto": MessageLookupByLibrary.simpleMessage("Фото удалено"),
         "replaceDrawing":
             MessageLookupByLibrary.simpleMessage("Заменить чертёж"),
         "replacePhoto": MessageLookupByLibrary.simpleMessage("Заменить фото"),
+        "requiredFieldsEmpty": MessageLookupByLibrary.simpleMessage(
+            "Обязательные поля для детали или поддеталей не заполнены"),
         "rubber": MessageLookupByLibrary.simpleMessage("резина"),
         "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
         "searchByOrderNumber":

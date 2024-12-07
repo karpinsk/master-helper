@@ -41,11 +41,15 @@
   "none": "---",
   "noNotes": "No notes",
   "notes": "Notes",
+  "ok": "OK",
   "orderNumber": "Order number",
   "photo": "Photo",
   "photoAdded": "Photo is successfully added!",
+  "removeDrawing": "Drawing was removed",
+  "removePhoto": "Photo was removed",
   "replaceDrawing": "Replace drawing",
   "replacePhoto": "Replace photo",
+  "requiredFieldsEmpty": "Required fields for detail or subdetails are not filled",
   "rubber": "rubber",
   "save": "Save",
   "searchByOrderNumber": "Search by order number",
@@ -62,5 +66,7 @@
   "type": "Type",
   "statusInProgress": "В работе",
   "statusWaiting": "Ожидание",
-  "drawingSoonExpiring": "До истечения чертежа осталось менее 10 дней"
+  "drawingSoonExpiring": "До истечения чертежа осталось менее 10 дней",
+  "drawingRemoved": "Drawing removed",
+  "photoRemoved": "Photo removed"
 }

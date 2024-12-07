@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:master_helper/features/detail_form/detail_form_bloc.dart';
 import 'package:master_helper/features/detail_form/widgets/detail_form_section.dart';
 import 'package:master_helper/features/detail_form/widgets/detail_form_button.dart';
+import 'package:master_helper/features/detail_form/widgets/detail_form_snackbar.dart';
 import 'package:master_helper/generated/l10n.dart';
 import 'package:master_helper/features/specification/specification_page.dart';
 
@@ -63,6 +64,7 @@ class DetailFormView extends StatelessWidget {
                               }),
                               ExpansionTile(
                                 initiallyExpanded: true,
+                                maintainState: true,
                                 shape: const Border(),
                                 title: BlocSelector<DetailFormBloc, DetailFormState, String?>(
                                   selector: (state) => state.mainDetailName,
@@ -118,6 +120,8 @@ class DetailFormView extends StatelessWidget {
                           : () {
                               if (_formKey.currentState?.validate() ?? false) {
                                 bloc.add(const DetailFormEvent.submitButtonTapped());
+                              } else {
+                                showDetailFormSnackbar(context: context, message: localized.requiredFieldsEmpty);
                               }
                             },
                       style: ElevatedButton.styleFrom(

@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:master_helper/features/detail_form/detail_form_bloc.dart';
 import 'package:master_helper/features/detail_form/widgets/detail_dto.dart';
@@ -11,12 +8,12 @@ import 'package:master_helper/features/detail_form/widgets/dashed_divider.dart';
 import 'package:master_helper/features/detail_form/widgets/detail_action_buttons.dart';
 import 'package:master_helper/features/detail_form/widgets/delete_confirmation_dialog.dart';
 import 'package:master_helper/core/models/detail_field.dart';
+import 'package:master_helper/features/detail_form/widgets/detail_section_utils.dart';
 import 'package:master_helper/features/specification/specification_page.dart';
 import 'package:master_helper/generated/l10n.dart';
 import 'package:master_helper/features/home/home.dart';
-import 'package:toastification/toastification.dart';
 
-class DetailFormSection extends StatelessWidget {
+class DetailFormSection extends StatelessWidget with DetailSectionUtilsMixin {
   final DetailDto detailDto;
   final bool isMainDetail;
   final int index;
@@ -159,7 +156,7 @@ class DetailFormSection extends StatelessWidget {
                   ),
                   readOnly: true,
                   onTap: () async {
-                    DateTime? selectedDate = await _selectDate(context);
+                    DateTime? selectedDate = await selectDate(context);
                     if (selectedDate != null) {
                       detailDto.drawingExpirationDate = selectedDate;
                       bloc.add(DetailFormEvent.detailUpdated(
@@ -175,107 +172,4 @@ class DetailFormSection extends StatelessWidget {
       );
     });
   }
-
-  Future<DateTime?> _selectDate(BuildContext context) async {
-    final DateTime today = DateTime.now();
-    final DateTime yesterday = today.subtract(const Duration(days: 1));
-
-    return await showDatePicker(
-      context: context,
-      initialDate: yesterday,
-      firstDate: yesterday,
-      lastDate: DateTime(today.year + 5),
-    );
-  }
-
-  void showImagePicker({required BuildContext context, required DetailDto detail, bool isDrawing = true}) async {
-    final localized = S.of(context);
-    final newPath = await _showImageSourceActionSheet(
-      context: context,
-      detail: detail,
-      isDrawing: isDrawing,
-    );
-
-    if (newPath != null) {
-      context.read<DetailFormBloc>().add(DetailFormEvent.detailUpdated(
-          detailId: detail.id, field: isDrawing ? DetailField.drawingPath : DetailField.photoPath, value: newPath));
-      Toastification().show(
-        context: context,
-        icon: const Icon(Icons.check_circle_rounded),
-        alignment: Alignment.topRight,
-        title: Text(
-          isDrawing ? localized.drawingAdded : localized.photoAdded,
-          style: const TextStyle(color: Colors.black),
-        ),
-        autoCloseDuration: const Duration(seconds: 3),
-        backgroundColor: Colors.white,
-      );
-    }
-  }
-
-  Future<String?> _showImageSourceActionSheet({
-    required BuildContext context,
-    required DetailDto detail,
-    bool isDrawing = true,
-  }) async {
-    return await showModalBottomSheet<String>(
-      context: context,
-      builder: (BuildContext context) {
-        final localized = S.of(context);
-
-        return SafeArea(
-          child: Wrap(
-            children: <Widget>[
-              ListTile(
-                leading: const Icon(Icons.photo_library),
-                title: Text(localized.gallery),
-                onTap: () async {
-                  final path = await _handleImageSelection(
-                    context: context,
-                    source: ImageSource.gallery,
-                    detail: detail,
-                    isDrawing: isDrawing,
-                  );
-                  Navigator.pop(context, path);
-                },
-              ),
-              if (Platform.isAndroid || Platform.isIOS)
-                ListTile(
-                  leading: const Icon(Icons.camera_alt),
-                  title: Text(localized.camera),
-                  onTap: () async {
-                    final path = await _handleImageSelection(
-                      context: context,
-                      source: ImageSource.camera,
-                      detail: detail,
-                      isDrawing: isDrawing,
-                    );
-                    Navigator.pop(context, path);
-                  },
-                ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-Future<String?> _handleImageSelection({
-  required BuildContext context,
-  required ImageSource source,
-  required DetailDto detail,
-  required bool isDrawing,
-}) async {
-  final pickedFile = await ImagePicker().pickImage(source: source);
-  if (pickedFile != null) {
-    final newPath = pickedFile.path;
-    if (isDrawing) {
-      detail.drawingPath = newPath;
-    } else {
-      detail.photoPath = newPath;
-    }
-    return newPath;
-  }
-  return null;
 }

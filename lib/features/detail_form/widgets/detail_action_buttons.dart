@@ -59,10 +59,3 @@ class DetailActionButtons extends StatelessWidget {
     );
   }
 }
-
-
-  // We show this button if:
-  // 1. Detail was already added to the database OR
-  // 2. For subdetails
-  // detailDto.subDetailIds.isNotEmpty || detailDto.parentId != null || (detailDto.id?.isNegative ?? false)
-

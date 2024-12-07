@@ -75,6 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Drawing expiration date"),
         "drawingExpired":
             MessageLookupByLibrary.simpleMessage("Drawing is expired"),
+        "drawingRemoved":
+            MessageLookupByLibrary.simpleMessage("Drawing removed"),
         "drawingSoonExpiring": MessageLookupByLibrary.simpleMessage(
             "До истечения чертежа осталось менее 10 дней"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
@@ -98,13 +100,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "noNotes": MessageLookupByLibrary.simpleMessage("No notes"),
         "none": MessageLookupByLibrary.simpleMessage("---"),
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
+        "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "orderNumber": MessageLookupByLibrary.simpleMessage("Order number"),
         "photo": MessageLookupByLibrary.simpleMessage("Photo"),
         "photoAdded": MessageLookupByLibrary.simpleMessage(
             "Photo is successfully added!"),
+        "photoRemoved": MessageLookupByLibrary.simpleMessage("Photo removed"),
+        "removeDrawing":
+            MessageLookupByLibrary.simpleMessage("Drawing was removed"),
+        "removePhoto":
+            MessageLookupByLibrary.simpleMessage("Photo was removed"),
         "replaceDrawing":
             MessageLookupByLibrary.simpleMessage("Replace drawing"),
         "replacePhoto": MessageLookupByLibrary.simpleMessage("Replace photo"),
+        "requiredFieldsEmpty": MessageLookupByLibrary.simpleMessage(
+            "Required fields for detail or subdetails are not filled"),
         "rubber": MessageLookupByLibrary.simpleMessage("rubber"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "searchByOrderNumber":

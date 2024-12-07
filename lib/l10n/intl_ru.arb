@@ -40,11 +40,15 @@
   "none": "---",
   "noNotes": "Нет заметок",
   "notes": "Заметки",
+  "ok": "OK",
   "orderNumber": "Номер заказа",
   "photo": "Фото",
   "photoAdded": "Фото детали успешно добавлено!",
+  "removeDrawing": "Чертёж удалён",
+  "removePhoto": "Фото удалено",
   "replaceDrawing": "Заменить чертёж",
   "replacePhoto": "Заменить фото",
+  "requiredFieldsEmpty": "Обязательные поля для детали или поддеталей не заполнены",
   "rubber": "резина",
   "save": "Сохранить",
   "searchByOrderNumber": "Искать по номеру заказа",
@@ -62,5 +66,7 @@
   "drawingExpired": "Чертёж детали просрочен. Необходимо продлить чертёж",
   "statusInProgress": "В работе",
   "statusWaiting": "Ожидание",
-  "drawingSoonExpiring": "До истечения чертежа осталось менее 10 дней"
+  "drawingSoonExpiring": "До истечения чертежа осталось менее 10 дней",
+  "drawingRemoved": "Drawing removed",
+  "photoRemoved": "Photo removed"
 }

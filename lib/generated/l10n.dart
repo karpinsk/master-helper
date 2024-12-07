@@ -470,6 +470,16 @@ class S {
     );
   }
 
+  /// `OK`
+  String get ok {
+    return Intl.message(
+      'OK',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Order number`
   String get orderNumber {
     return Intl.message(
@@ -500,6 +510,26 @@ class S {
     );
   }
 
+  /// `Drawing was removed`
+  String get removeDrawing {
+    return Intl.message(
+      'Drawing was removed',
+      name: 'removeDrawing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photo was removed`
+  String get removePhoto {
+    return Intl.message(
+      'Photo was removed',
+      name: 'removePhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Replace drawing`
   String get replaceDrawing {
     return Intl.message(
@@ -515,6 +545,16 @@ class S {
     return Intl.message(
       'Replace photo',
       name: 'replacePhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Required fields for detail or subdetails are not filled`
+  String get requiredFieldsEmpty {
+    return Intl.message(
+      'Required fields for detail or subdetails are not filled',
+      name: 'requiredFieldsEmpty',
       desc: '',
       args: [],
     );
@@ -685,6 +725,26 @@ class S {
     return Intl.message(
       'До истечения чертежа осталось менее 10 дней',
       name: 'drawingSoonExpiring',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Drawing removed`
+  String get drawingRemoved {
+    return Intl.message(
+      'Drawing removed',
+      name: 'drawingRemoved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photo removed`
+  String get photoRemoved {
+    return Intl.message(
+      'Photo removed',
+      name: 'photoRemoved',
       desc: '',
       args: [],
     );
