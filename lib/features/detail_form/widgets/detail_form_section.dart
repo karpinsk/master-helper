@@ -124,7 +124,7 @@ class DetailFormSection extends StatelessWidget {
                     }
                   } else {
                     bloc.add(DetailFormEvent.deleteButtonTapped(detailId: detailDto.id!));
-                    if (detailDto.parentId != null) {
+                    if (detailDto.id == null || detailDto.id! > 0) {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
