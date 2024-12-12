@@ -5,9 +5,9 @@ import 'package:intl/intl.dart';
 import 'package:master_helper/features/detail_form/detail_form_bloc.dart';
 import 'package:master_helper/features/detail_form/widgets/detail_dto.dart';
 import 'package:master_helper/features/detail_form/widgets/dashed_divider.dart';
-import 'package:master_helper/features/detail_form/widgets/detail_action_buttons.dart';
 import 'package:master_helper/features/detail_form/widgets/delete_confirmation_dialog.dart';
 import 'package:master_helper/core/models/detail_field.dart';
+import 'package:master_helper/features/detail_form/widgets/detail_form_button.dart';
 import 'package:master_helper/features/detail_form/widgets/detail_section_utils.dart';
 import 'package:master_helper/features/specification/specification_page.dart';
 import 'package:master_helper/generated/l10n.dart';
@@ -93,44 +93,74 @@ class DetailFormSection extends StatelessWidget with DetailSectionUtilsMixin {
             const SizedBox(height: 16),
             BlocBuilder<DetailFormBloc, DetailFormState>(buildWhen: (previous, current) {
               final areSubDetailEqual = const DeepCollectionEquality().equals(
-                previous.subDetails,
-                current.subDetails,
+                previous.details,
+                current.details,
               );
               final mainDetailChanged = previous.mainDetail != current.mainDetail;
 
               return !areSubDetailEqual || mainDetailChanged;
             }, builder: (context, state) {
-              return DetailActionButtons(
-                detailDto: detailDto,
-                onDrawingPicked: () => showImagePicker(context: context, detail: detailDto),
-                onPhotoPicked: () => showImagePicker(context: context, detail: detailDto, isDrawing: false),
-                onDelete: () async {
-                  if (detailDto.subDetailIds.isNotEmpty) {
-                    final shouldDelete = await DeleteConfirmationDialog.showDeleteConfirmationDialog(context);
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    child: DetailFormButton(
+                      onPressed: () => showImagePicker(context: context, detail: detailDto),
+                      icon: Icon(
+                        detailDto.drawingPath == null ? Icons.add_a_photo : Icons.published_with_changes,
+                      ),
+                      label: detailDto.drawingPath == null ? localized.addDrawing : localized.replaceDrawing,
+                    ),
+                  ),
+                  Expanded(
+                    child: DetailFormButton(
+                      onPressed: () => showImagePicker(context: context, detail: detailDto, isDrawing: false),
+                      icon: Icon(
+                        detailDto.photoPath == null ? Icons.add_photo_alternate : Icons.published_with_changes,
+                      ),
+                      label: detailDto.photoPath == null ? localized.addPhoto : localized.replacePhoto,
+                    ),
+                  ),
+                  if ((detailDto.id != null))
+                    Expanded(
+                      child: DetailFormButton(
+                        onPressed: () async {
+                          if (detailDto.subDetailIds.isNotEmpty) {
+                            final shouldDelete = await DeleteConfirmationDialog.showDeleteConfirmationDialog(context);
 
-                    if (shouldDelete) {
-                      bloc.add(DetailFormEvent.deleteButtonTapped(detailId: detailDto.id!));
-                      if (isMainDetail) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const HomeScreen(),
-                          ),
-                        );
-                      }
-                    }
-                  } else {
-                    bloc.add(DetailFormEvent.deleteButtonTapped(detailId: detailDto.id!));
-                    if (detailDto.id == null || detailDto.id! > 0) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SpecificationPage(),
+                            if (shouldDelete) {
+                              bloc.add(DetailFormEvent.deleteButtonTapped(detailId: detailDto.id!));
+                              if (isMainDetail) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const HomeScreen(),
+                                  ),
+                                );
+                              }
+                            }
+                          } else {
+                            bloc.add(DetailFormEvent.deleteButtonTapped(detailId: detailDto.id!));
+                            if (detailDto.id == null || detailDto.id! > 0) {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const SpecificationPage(),
+                                ),
+                              );
+                            }
+                          }
+                        },
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.red,
                         ),
-                      );
-                    }
-                  }
-                },
+                        label: localized.deleteDetail,
+                        borderColor: Colors.red,
+                        textColor: Colors.red,
+                      ),
+                    ),
+                ],
               );
             }),
             if (detailDto.drawingPath != null)

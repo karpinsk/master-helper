@@ -23,7 +23,6 @@ mixin _$SpecificationEvent {
     required TResult Function(int detailId, String comment) commentUpdated,
     required TResult Function(int detailId, String techProcess)
         techProcessUpdated,
-    required TResult Function(String? orderNumber) searchQueryChanged,
     required TResult Function(int detailId, DetailStatus status)
         detailStatusUpdated,
   }) =>
@@ -34,7 +33,6 @@ mixin _$SpecificationEvent {
     TResult? Function(int detailId)? detailSelected,
     TResult? Function(int detailId, String comment)? commentUpdated,
     TResult? Function(int detailId, String techProcess)? techProcessUpdated,
-    TResult? Function(String? orderNumber)? searchQueryChanged,
     TResult? Function(int detailId, DetailStatus status)? detailStatusUpdated,
   }) =>
       throw _privateConstructorUsedError;
@@ -44,7 +42,6 @@ mixin _$SpecificationEvent {
     TResult Function(int detailId)? detailSelected,
     TResult Function(int detailId, String comment)? commentUpdated,
     TResult Function(int detailId, String techProcess)? techProcessUpdated,
-    TResult Function(String? orderNumber)? searchQueryChanged,
     TResult Function(int detailId, DetailStatus status)? detailStatusUpdated,
     required TResult orElse(),
   }) =>
@@ -55,7 +52,6 @@ mixin _$SpecificationEvent {
     required TResult Function(_DetailSelected value) detailSelected,
     required TResult Function(_CommentUpdated value) commentUpdated,
     required TResult Function(_TechProcessUpdated value) techProcessUpdated,
-    required TResult Function(_SearchQueryChanged value) searchQueryChanged,
     required TResult Function(_DetailStatusUpdated value) detailStatusUpdated,
   }) =>
       throw _privateConstructorUsedError;
@@ -65,7 +61,6 @@ mixin _$SpecificationEvent {
     TResult? Function(_DetailSelected value)? detailSelected,
     TResult? Function(_CommentUpdated value)? commentUpdated,
     TResult? Function(_TechProcessUpdated value)? techProcessUpdated,
-    TResult? Function(_SearchQueryChanged value)? searchQueryChanged,
     TResult? Function(_DetailStatusUpdated value)? detailStatusUpdated,
   }) =>
       throw _privateConstructorUsedError;
@@ -75,7 +70,6 @@ mixin _$SpecificationEvent {
     TResult Function(_DetailSelected value)? detailSelected,
     TResult Function(_CommentUpdated value)? commentUpdated,
     TResult Function(_TechProcessUpdated value)? techProcessUpdated,
-    TResult Function(_SearchQueryChanged value)? searchQueryChanged,
     TResult Function(_DetailStatusUpdated value)? detailStatusUpdated,
     required TResult orElse(),
   }) =>
@@ -158,7 +152,6 @@ class _$DetailsLoadedImpl
     required TResult Function(int detailId, String comment) commentUpdated,
     required TResult Function(int detailId, String techProcess)
         techProcessUpdated,
-    required TResult Function(String? orderNumber) searchQueryChanged,
     required TResult Function(int detailId, DetailStatus status)
         detailStatusUpdated,
   }) {
@@ -172,7 +165,6 @@ class _$DetailsLoadedImpl
     TResult? Function(int detailId)? detailSelected,
     TResult? Function(int detailId, String comment)? commentUpdated,
     TResult? Function(int detailId, String techProcess)? techProcessUpdated,
-    TResult? Function(String? orderNumber)? searchQueryChanged,
     TResult? Function(int detailId, DetailStatus status)? detailStatusUpdated,
   }) {
     return detailsLoaded?.call();
@@ -185,7 +177,6 @@ class _$DetailsLoadedImpl
     TResult Function(int detailId)? detailSelected,
     TResult Function(int detailId, String comment)? commentUpdated,
     TResult Function(int detailId, String techProcess)? techProcessUpdated,
-    TResult Function(String? orderNumber)? searchQueryChanged,
     TResult Function(int detailId, DetailStatus status)? detailStatusUpdated,
     required TResult orElse(),
   }) {
@@ -202,7 +193,6 @@ class _$DetailsLoadedImpl
     required TResult Function(_DetailSelected value) detailSelected,
     required TResult Function(_CommentUpdated value) commentUpdated,
     required TResult Function(_TechProcessUpdated value) techProcessUpdated,
-    required TResult Function(_SearchQueryChanged value) searchQueryChanged,
     required TResult Function(_DetailStatusUpdated value) detailStatusUpdated,
   }) {
     return detailsLoaded(this);
@@ -215,7 +205,6 @@ class _$DetailsLoadedImpl
     TResult? Function(_DetailSelected value)? detailSelected,
     TResult? Function(_CommentUpdated value)? commentUpdated,
     TResult? Function(_TechProcessUpdated value)? techProcessUpdated,
-    TResult? Function(_SearchQueryChanged value)? searchQueryChanged,
     TResult? Function(_DetailStatusUpdated value)? detailStatusUpdated,
   }) {
     return detailsLoaded?.call(this);
@@ -228,7 +217,6 @@ class _$DetailsLoadedImpl
     TResult Function(_DetailSelected value)? detailSelected,
     TResult Function(_CommentUpdated value)? commentUpdated,
     TResult Function(_TechProcessUpdated value)? techProcessUpdated,
-    TResult Function(_SearchQueryChanged value)? searchQueryChanged,
     TResult Function(_DetailStatusUpdated value)? detailStatusUpdated,
     required TResult orElse(),
   }) {
@@ -328,7 +316,6 @@ class _$DetailSelectedImpl
     required TResult Function(int detailId, String comment) commentUpdated,
     required TResult Function(int detailId, String techProcess)
         techProcessUpdated,
-    required TResult Function(String? orderNumber) searchQueryChanged,
     required TResult Function(int detailId, DetailStatus status)
         detailStatusUpdated,
   }) {
@@ -342,7 +329,6 @@ class _$DetailSelectedImpl
     TResult? Function(int detailId)? detailSelected,
     TResult? Function(int detailId, String comment)? commentUpdated,
     TResult? Function(int detailId, String techProcess)? techProcessUpdated,
-    TResult? Function(String? orderNumber)? searchQueryChanged,
     TResult? Function(int detailId, DetailStatus status)? detailStatusUpdated,
   }) {
     return detailSelected?.call(detailId);
@@ -355,7 +341,6 @@ class _$DetailSelectedImpl
     TResult Function(int detailId)? detailSelected,
     TResult Function(int detailId, String comment)? commentUpdated,
     TResult Function(int detailId, String techProcess)? techProcessUpdated,
-    TResult Function(String? orderNumber)? searchQueryChanged,
     TResult Function(int detailId, DetailStatus status)? detailStatusUpdated,
     required TResult orElse(),
   }) {
@@ -372,7 +357,6 @@ class _$DetailSelectedImpl
     required TResult Function(_DetailSelected value) detailSelected,
     required TResult Function(_CommentUpdated value) commentUpdated,
     required TResult Function(_TechProcessUpdated value) techProcessUpdated,
-    required TResult Function(_SearchQueryChanged value) searchQueryChanged,
     required TResult Function(_DetailStatusUpdated value) detailStatusUpdated,
   }) {
     return detailSelected(this);
@@ -385,7 +369,6 @@ class _$DetailSelectedImpl
     TResult? Function(_DetailSelected value)? detailSelected,
     TResult? Function(_CommentUpdated value)? commentUpdated,
     TResult? Function(_TechProcessUpdated value)? techProcessUpdated,
-    TResult? Function(_SearchQueryChanged value)? searchQueryChanged,
     TResult? Function(_DetailStatusUpdated value)? detailStatusUpdated,
   }) {
     return detailSelected?.call(this);
@@ -398,7 +381,6 @@ class _$DetailSelectedImpl
     TResult Function(_DetailSelected value)? detailSelected,
     TResult Function(_CommentUpdated value)? commentUpdated,
     TResult Function(_TechProcessUpdated value)? techProcessUpdated,
-    TResult Function(_SearchQueryChanged value)? searchQueryChanged,
     TResult Function(_DetailStatusUpdated value)? detailStatusUpdated,
     required TResult orElse(),
   }) {
@@ -515,7 +497,6 @@ class _$CommentUpdatedImpl
     required TResult Function(int detailId, String comment) commentUpdated,
     required TResult Function(int detailId, String techProcess)
         techProcessUpdated,
-    required TResult Function(String? orderNumber) searchQueryChanged,
     required TResult Function(int detailId, DetailStatus status)
         detailStatusUpdated,
   }) {
@@ -529,7 +510,6 @@ class _$CommentUpdatedImpl
     TResult? Function(int detailId)? detailSelected,
     TResult? Function(int detailId, String comment)? commentUpdated,
     TResult? Function(int detailId, String techProcess)? techProcessUpdated,
-    TResult? Function(String? orderNumber)? searchQueryChanged,
     TResult? Function(int detailId, DetailStatus status)? detailStatusUpdated,
   }) {
     return commentUpdated?.call(detailId, comment);
@@ -542,7 +522,6 @@ class _$CommentUpdatedImpl
     TResult Function(int detailId)? detailSelected,
     TResult Function(int detailId, String comment)? commentUpdated,
     TResult Function(int detailId, String techProcess)? techProcessUpdated,
-    TResult Function(String? orderNumber)? searchQueryChanged,
     TResult Function(int detailId, DetailStatus status)? detailStatusUpdated,
     required TResult orElse(),
   }) {
@@ -559,7 +538,6 @@ class _$CommentUpdatedImpl
     required TResult Function(_DetailSelected value) detailSelected,
     required TResult Function(_CommentUpdated value) commentUpdated,
     required TResult Function(_TechProcessUpdated value) techProcessUpdated,
-    required TResult Function(_SearchQueryChanged value) searchQueryChanged,
     required TResult Function(_DetailStatusUpdated value) detailStatusUpdated,
   }) {
     return commentUpdated(this);
@@ -572,7 +550,6 @@ class _$CommentUpdatedImpl
     TResult? Function(_DetailSelected value)? detailSelected,
     TResult? Function(_CommentUpdated value)? commentUpdated,
     TResult? Function(_TechProcessUpdated value)? techProcessUpdated,
-    TResult? Function(_SearchQueryChanged value)? searchQueryChanged,
     TResult? Function(_DetailStatusUpdated value)? detailStatusUpdated,
   }) {
     return commentUpdated?.call(this);
@@ -585,7 +562,6 @@ class _$CommentUpdatedImpl
     TResult Function(_DetailSelected value)? detailSelected,
     TResult Function(_CommentUpdated value)? commentUpdated,
     TResult Function(_TechProcessUpdated value)? techProcessUpdated,
-    TResult Function(_SearchQueryChanged value)? searchQueryChanged,
     TResult Function(_DetailStatusUpdated value)? detailStatusUpdated,
     required TResult orElse(),
   }) {
@@ -706,7 +682,6 @@ class _$TechProcessUpdatedImpl
     required TResult Function(int detailId, String comment) commentUpdated,
     required TResult Function(int detailId, String techProcess)
         techProcessUpdated,
-    required TResult Function(String? orderNumber) searchQueryChanged,
     required TResult Function(int detailId, DetailStatus status)
         detailStatusUpdated,
   }) {
@@ -720,7 +695,6 @@ class _$TechProcessUpdatedImpl
     TResult? Function(int detailId)? detailSelected,
     TResult? Function(int detailId, String comment)? commentUpdated,
     TResult? Function(int detailId, String techProcess)? techProcessUpdated,
-    TResult? Function(String? orderNumber)? searchQueryChanged,
     TResult? Function(int detailId, DetailStatus status)? detailStatusUpdated,
   }) {
     return techProcessUpdated?.call(detailId, techProcess);
@@ -733,7 +707,6 @@ class _$TechProcessUpdatedImpl
     TResult Function(int detailId)? detailSelected,
     TResult Function(int detailId, String comment)? commentUpdated,
     TResult Function(int detailId, String techProcess)? techProcessUpdated,
-    TResult Function(String? orderNumber)? searchQueryChanged,
     TResult Function(int detailId, DetailStatus status)? detailStatusUpdated,
     required TResult orElse(),
   }) {
@@ -750,7 +723,6 @@ class _$TechProcessUpdatedImpl
     required TResult Function(_DetailSelected value) detailSelected,
     required TResult Function(_CommentUpdated value) commentUpdated,
     required TResult Function(_TechProcessUpdated value) techProcessUpdated,
-    required TResult Function(_SearchQueryChanged value) searchQueryChanged,
     required TResult Function(_DetailStatusUpdated value) detailStatusUpdated,
   }) {
     return techProcessUpdated(this);
@@ -763,7 +735,6 @@ class _$TechProcessUpdatedImpl
     TResult? Function(_DetailSelected value)? detailSelected,
     TResult? Function(_CommentUpdated value)? commentUpdated,
     TResult? Function(_TechProcessUpdated value)? techProcessUpdated,
-    TResult? Function(_SearchQueryChanged value)? searchQueryChanged,
     TResult? Function(_DetailStatusUpdated value)? detailStatusUpdated,
   }) {
     return techProcessUpdated?.call(this);
@@ -776,7 +747,6 @@ class _$TechProcessUpdatedImpl
     TResult Function(_DetailSelected value)? detailSelected,
     TResult Function(_CommentUpdated value)? commentUpdated,
     TResult Function(_TechProcessUpdated value)? techProcessUpdated,
-    TResult Function(_SearchQueryChanged value)? searchQueryChanged,
     TResult Function(_DetailStatusUpdated value)? detailStatusUpdated,
     required TResult orElse(),
   }) {
@@ -798,186 +768,6 @@ abstract class _TechProcessUpdated implements SpecificationEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TechProcessUpdatedImplCopyWith<_$TechProcessUpdatedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$SearchQueryChangedImplCopyWith<$Res> {
-  factory _$$SearchQueryChangedImplCopyWith(_$SearchQueryChangedImpl value,
-          $Res Function(_$SearchQueryChangedImpl) then) =
-      __$$SearchQueryChangedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String? orderNumber});
-}
-
-/// @nodoc
-class __$$SearchQueryChangedImplCopyWithImpl<$Res>
-    extends _$SpecificationEventCopyWithImpl<$Res, _$SearchQueryChangedImpl>
-    implements _$$SearchQueryChangedImplCopyWith<$Res> {
-  __$$SearchQueryChangedImplCopyWithImpl(_$SearchQueryChangedImpl _value,
-      $Res Function(_$SearchQueryChangedImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SpecificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? orderNumber = freezed,
-  }) {
-    return _then(_$SearchQueryChangedImpl(
-      freezed == orderNumber
-          ? _value.orderNumber
-          : orderNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$SearchQueryChangedImpl
-    with DiagnosticableTreeMixin
-    implements _SearchQueryChanged {
-  const _$SearchQueryChangedImpl(this.orderNumber);
-
-  @override
-  final String? orderNumber;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SpecificationEvent.searchQueryChanged(orderNumber: $orderNumber)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(
-          DiagnosticsProperty('type', 'SpecificationEvent.searchQueryChanged'))
-      ..add(DiagnosticsProperty('orderNumber', orderNumber));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SearchQueryChangedImpl &&
-            (identical(other.orderNumber, orderNumber) ||
-                other.orderNumber == orderNumber));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, orderNumber);
-
-  /// Create a copy of SpecificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SearchQueryChangedImplCopyWith<_$SearchQueryChangedImpl> get copyWith =>
-      __$$SearchQueryChangedImplCopyWithImpl<_$SearchQueryChangedImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() detailsLoaded,
-    required TResult Function(int detailId) detailSelected,
-    required TResult Function(int detailId, String comment) commentUpdated,
-    required TResult Function(int detailId, String techProcess)
-        techProcessUpdated,
-    required TResult Function(String? orderNumber) searchQueryChanged,
-    required TResult Function(int detailId, DetailStatus status)
-        detailStatusUpdated,
-  }) {
-    return searchQueryChanged(orderNumber);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? detailsLoaded,
-    TResult? Function(int detailId)? detailSelected,
-    TResult? Function(int detailId, String comment)? commentUpdated,
-    TResult? Function(int detailId, String techProcess)? techProcessUpdated,
-    TResult? Function(String? orderNumber)? searchQueryChanged,
-    TResult? Function(int detailId, DetailStatus status)? detailStatusUpdated,
-  }) {
-    return searchQueryChanged?.call(orderNumber);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? detailsLoaded,
-    TResult Function(int detailId)? detailSelected,
-    TResult Function(int detailId, String comment)? commentUpdated,
-    TResult Function(int detailId, String techProcess)? techProcessUpdated,
-    TResult Function(String? orderNumber)? searchQueryChanged,
-    TResult Function(int detailId, DetailStatus status)? detailStatusUpdated,
-    required TResult orElse(),
-  }) {
-    if (searchQueryChanged != null) {
-      return searchQueryChanged(orderNumber);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_DetailsLoaded value) detailsLoaded,
-    required TResult Function(_DetailSelected value) detailSelected,
-    required TResult Function(_CommentUpdated value) commentUpdated,
-    required TResult Function(_TechProcessUpdated value) techProcessUpdated,
-    required TResult Function(_SearchQueryChanged value) searchQueryChanged,
-    required TResult Function(_DetailStatusUpdated value) detailStatusUpdated,
-  }) {
-    return searchQueryChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_DetailsLoaded value)? detailsLoaded,
-    TResult? Function(_DetailSelected value)? detailSelected,
-    TResult? Function(_CommentUpdated value)? commentUpdated,
-    TResult? Function(_TechProcessUpdated value)? techProcessUpdated,
-    TResult? Function(_SearchQueryChanged value)? searchQueryChanged,
-    TResult? Function(_DetailStatusUpdated value)? detailStatusUpdated,
-  }) {
-    return searchQueryChanged?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_DetailsLoaded value)? detailsLoaded,
-    TResult Function(_DetailSelected value)? detailSelected,
-    TResult Function(_CommentUpdated value)? commentUpdated,
-    TResult Function(_TechProcessUpdated value)? techProcessUpdated,
-    TResult Function(_SearchQueryChanged value)? searchQueryChanged,
-    TResult Function(_DetailStatusUpdated value)? detailStatusUpdated,
-    required TResult orElse(),
-  }) {
-    if (searchQueryChanged != null) {
-      return searchQueryChanged(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _SearchQueryChanged implements SpecificationEvent {
-  const factory _SearchQueryChanged(final String? orderNumber) =
-      _$SearchQueryChangedImpl;
-
-  String? get orderNumber;
-
-  /// Create a copy of SpecificationEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SearchQueryChangedImplCopyWith<_$SearchQueryChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1076,7 +866,6 @@ class _$DetailStatusUpdatedImpl
     required TResult Function(int detailId, String comment) commentUpdated,
     required TResult Function(int detailId, String techProcess)
         techProcessUpdated,
-    required TResult Function(String? orderNumber) searchQueryChanged,
     required TResult Function(int detailId, DetailStatus status)
         detailStatusUpdated,
   }) {
@@ -1090,7 +879,6 @@ class _$DetailStatusUpdatedImpl
     TResult? Function(int detailId)? detailSelected,
     TResult? Function(int detailId, String comment)? commentUpdated,
     TResult? Function(int detailId, String techProcess)? techProcessUpdated,
-    TResult? Function(String? orderNumber)? searchQueryChanged,
     TResult? Function(int detailId, DetailStatus status)? detailStatusUpdated,
   }) {
     return detailStatusUpdated?.call(detailId, status);
@@ -1103,7 +891,6 @@ class _$DetailStatusUpdatedImpl
     TResult Function(int detailId)? detailSelected,
     TResult Function(int detailId, String comment)? commentUpdated,
     TResult Function(int detailId, String techProcess)? techProcessUpdated,
-    TResult Function(String? orderNumber)? searchQueryChanged,
     TResult Function(int detailId, DetailStatus status)? detailStatusUpdated,
     required TResult orElse(),
   }) {
@@ -1120,7 +907,6 @@ class _$DetailStatusUpdatedImpl
     required TResult Function(_DetailSelected value) detailSelected,
     required TResult Function(_CommentUpdated value) commentUpdated,
     required TResult Function(_TechProcessUpdated value) techProcessUpdated,
-    required TResult Function(_SearchQueryChanged value) searchQueryChanged,
     required TResult Function(_DetailStatusUpdated value) detailStatusUpdated,
   }) {
     return detailStatusUpdated(this);
@@ -1133,7 +919,6 @@ class _$DetailStatusUpdatedImpl
     TResult? Function(_DetailSelected value)? detailSelected,
     TResult? Function(_CommentUpdated value)? commentUpdated,
     TResult? Function(_TechProcessUpdated value)? techProcessUpdated,
-    TResult? Function(_SearchQueryChanged value)? searchQueryChanged,
     TResult? Function(_DetailStatusUpdated value)? detailStatusUpdated,
   }) {
     return detailStatusUpdated?.call(this);
@@ -1146,7 +931,6 @@ class _$DetailStatusUpdatedImpl
     TResult Function(_DetailSelected value)? detailSelected,
     TResult Function(_CommentUpdated value)? commentUpdated,
     TResult Function(_TechProcessUpdated value)? techProcessUpdated,
-    TResult Function(_SearchQueryChanged value)? searchQueryChanged,
     TResult Function(_DetailStatusUpdated value)? detailStatusUpdated,
     required TResult orElse(),
   }) {
@@ -1177,7 +961,6 @@ mixin _$SpecificationState {
   List<Detail> get details => throw _privateConstructorUsedError;
   Detail? get selectedDetail => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  String? get searchQuery => throw _privateConstructorUsedError;
   bool get hasError => throw _privateConstructorUsedError;
 
   /// Create a copy of SpecificationState
@@ -1197,7 +980,6 @@ abstract class $SpecificationStateCopyWith<$Res> {
       {List<Detail> details,
       Detail? selectedDetail,
       bool isLoading,
-      String? searchQuery,
       bool hasError});
 }
 
@@ -1219,7 +1001,6 @@ class _$SpecificationStateCopyWithImpl<$Res, $Val extends SpecificationState>
     Object? details = null,
     Object? selectedDetail = freezed,
     Object? isLoading = null,
-    Object? searchQuery = freezed,
     Object? hasError = null,
   }) {
     return _then(_value.copyWith(
@@ -1235,10 +1016,6 @@ class _$SpecificationStateCopyWithImpl<$Res, $Val extends SpecificationState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      searchQuery: freezed == searchQuery
-          ? _value.searchQuery
-          : searchQuery // ignore: cast_nullable_to_non_nullable
-              as String?,
       hasError: null == hasError
           ? _value.hasError
           : hasError // ignore: cast_nullable_to_non_nullable
@@ -1259,7 +1036,6 @@ abstract class _$$SpecificationStateImplCopyWith<$Res>
       {List<Detail> details,
       Detail? selectedDetail,
       bool isLoading,
-      String? searchQuery,
       bool hasError});
 }
 
@@ -1279,7 +1055,6 @@ class __$$SpecificationStateImplCopyWithImpl<$Res>
     Object? details = null,
     Object? selectedDetail = freezed,
     Object? isLoading = null,
-    Object? searchQuery = freezed,
     Object? hasError = null,
   }) {
     return _then(_$SpecificationStateImpl(
@@ -1295,10 +1070,6 @@ class __$$SpecificationStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      searchQuery: freezed == searchQuery
-          ? _value.searchQuery
-          : searchQuery // ignore: cast_nullable_to_non_nullable
-              as String?,
       hasError: null == hasError
           ? _value.hasError
           : hasError // ignore: cast_nullable_to_non_nullable
@@ -1316,7 +1087,6 @@ class _$SpecificationStateImpl
       {required final List<Detail> details,
       this.selectedDetail,
       required this.isLoading,
-      this.searchQuery,
       required this.hasError})
       : _details = details;
 
@@ -1333,13 +1103,11 @@ class _$SpecificationStateImpl
   @override
   final bool isLoading;
   @override
-  final String? searchQuery;
-  @override
   final bool hasError;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SpecificationState(details: $details, selectedDetail: $selectedDetail, isLoading: $isLoading, searchQuery: $searchQuery, hasError: $hasError)';
+    return 'SpecificationState(details: $details, selectedDetail: $selectedDetail, isLoading: $isLoading, hasError: $hasError)';
   }
 
   @override
@@ -1350,7 +1118,6 @@ class _$SpecificationStateImpl
       ..add(DiagnosticsProperty('details', details))
       ..add(DiagnosticsProperty('selectedDetail', selectedDetail))
       ..add(DiagnosticsProperty('isLoading', isLoading))
-      ..add(DiagnosticsProperty('searchQuery', searchQuery))
       ..add(DiagnosticsProperty('hasError', hasError));
   }
 
@@ -1364,8 +1131,6 @@ class _$SpecificationStateImpl
                 other.selectedDetail == selectedDetail) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.searchQuery, searchQuery) ||
-                other.searchQuery == searchQuery) &&
             (identical(other.hasError, hasError) ||
                 other.hasError == hasError));
   }
@@ -1376,7 +1141,6 @@ class _$SpecificationStateImpl
       const DeepCollectionEquality().hash(_details),
       selectedDetail,
       isLoading,
-      searchQuery,
       hasError);
 
   /// Create a copy of SpecificationState
@@ -1394,7 +1158,6 @@ abstract class _SpecificationState implements SpecificationState {
       {required final List<Detail> details,
       final Detail? selectedDetail,
       required final bool isLoading,
-      final String? searchQuery,
       required final bool hasError}) = _$SpecificationStateImpl;
 
   @override
@@ -1403,8 +1166,6 @@ abstract class _SpecificationState implements SpecificationState {
   Detail? get selectedDetail;
   @override
   bool get isLoading;
-  @override
-  String? get searchQuery;
   @override
   bool get hasError;
 

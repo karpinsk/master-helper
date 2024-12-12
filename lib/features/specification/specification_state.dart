@@ -6,7 +6,6 @@ class SpecificationState with _$SpecificationState {
     required List<Detail> details,
     Detail? selectedDetail,
     required bool isLoading,
-    String? searchQuery,
     required bool hasError,
   }) = _SpecificationState;
 
@@ -14,8 +13,7 @@ class SpecificationState with _$SpecificationState {
     return const SpecificationState(
       details: [],
       selectedDetail: null,
-      isLoading: false,
-      searchQuery: null,
+      isLoading: true,
       hasError: false,
     );
   }

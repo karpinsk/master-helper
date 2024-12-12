@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:master_helper/features/detail_form/detail_form_bloc.dart';
+import 'package:master_helper/features/detail_form/widgets/detail_dto.dart';
 import 'package:master_helper/features/detail_form/widgets/detail_form_section.dart';
 import 'package:master_helper/features/detail_form/widgets/detail_form_button.dart';
 import 'package:master_helper/features/detail_form/widgets/detail_form_snackbar.dart';
+import 'package:master_helper/features/orders/orders_page.dart';
 import 'package:master_helper/generated/l10n.dart';
 import 'package:master_helper/features/specification/specification_page.dart';
 
@@ -29,40 +31,38 @@ class DetailFormView extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SpecificationPage(
-                    detailId: detailId,
-                  ),
+                  builder: (context) => detailId == null
+                      ? const OrdersPage()
+                      : SpecificationPage(
+                          detailId: detailId,
+                        ),
                 ),
               );
             }
           },
-          child: BlocBuilder<DetailFormBloc, DetailFormState>(
-            buildWhen: (previous, current) {
-              return previous.subDetails != current.subDetails;
-            },
-            builder: (context, state) {
-              final mainDetail = state.mainDetail;
-              final subDetails = state.subDetails;
-
-              return Column(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: SingleChildScrollView(
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            children: [
-                              BlocBuilder<DetailFormBloc, DetailFormState>(buildWhen: (previous, current) {
-                                return previous.mainDetail != current.mainDetail;
-                              }, builder: (context, state) {
-                                return DetailFormSection(
-                                  detailDto: mainDetail,
-                                  isMainDetail: mainDetail.parentId == null,
-                                );
-                              }),
-                              ExpansionTile(
+          child: Column(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: SingleChildScrollView(
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          BlocSelector<DetailFormBloc, DetailFormState, DetailDto>(
+                            selector: (state) => state.mainDetail,
+                            builder: (context, mainDetail) {
+                              return DetailFormSection(
+                                detailDto: mainDetail,
+                                isMainDetail: mainDetail.parentId == null,
+                              );
+                            },
+                          ),
+                          BlocSelector<DetailFormBloc, DetailFormState, List<DetailDto>>(
+                            selector: (state) => state.details,
+                            builder: (context, subDetails) {
+                              return ExpansionTile(
                                 initiallyExpanded: true,
                                 maintainState: true,
                                 shape: const Border(),
@@ -85,14 +85,20 @@ class DetailFormView extends StatelessWidget {
                                   },
                                 ),
                                 children: [
-                                  for (int i = 0; i < subDetails.length; i++)
-                                    DetailFormSection(
-                                      detailDto: subDetails[i],
-                                      index: i,
-                                      addDivider: i != subDetails.length - 1,
-                                    ),
+                                  ListView.builder(
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: subDetails.length,
+                                    itemBuilder: (context, index) {
+                                      return DetailFormSection(
+                                        detailDto: subDetails[index],
+                                        index: index,
+                                        addDivider: index != subDetails.length - 1,
+                                      );
+                                    },
+                                  ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                                     child: SizedBox(
                                       width: double.infinity,
                                       child: DetailFormButton(
@@ -105,17 +111,22 @@ class DetailFormView extends StatelessWidget {
                                     ),
                                   ),
                                 ],
-                              ),
-                            ],
+                              );
+                            },
                           ),
-                        ),
+                        ],
                       ),
                     ),
                   ),
-                  SizedBox(
+                ),
+              ),
+              BlocSelector<DetailFormBloc, DetailFormState, bool>(
+                selector: (state) => state.isSubmitting,
+                builder: (context, isSubmitting) {
+                  return SizedBox(
                     width: double.infinity,
                     child: TextButton(
-                      onPressed: state.isSubmitting
+                      onPressed: isSubmitting
                           ? null
                           : () {
                               if (_formKey.currentState?.validate() ?? false) {
@@ -136,7 +147,7 @@ class DetailFormView extends StatelessWidget {
                           width: 1.5,
                         ),
                       ),
-                      child: state.isSubmitting
+                      child: isSubmitting
                           ? const SizedBox(
                               height: 24.0,
                               width: 24.0,
@@ -151,10 +162,10 @@ class DetailFormView extends StatelessWidget {
                               style: const TextStyle(color: Colors.white),
                             ),
                     ),
-                  ),
-                ],
-              );
-            },
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),

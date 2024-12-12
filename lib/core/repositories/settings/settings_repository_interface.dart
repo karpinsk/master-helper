@@ -1,4 +1,7 @@
 abstract interface class SettingsRepositoryInterface {
-  bool isDarkThemeEnabled();
-  Future<void> toggleTheme(bool isDarkThemeEnabled);
+  bool isDarkThemeSelected();
+  String getLanguageCode();
+
+  Future<void> setDarkThemeSelected(bool isDarkThemeEnabled);
+  Future<void> setLanguageCode(String languageCode);
 }

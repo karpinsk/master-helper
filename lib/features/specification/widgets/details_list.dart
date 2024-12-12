@@ -3,24 +3,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:master_helper/core/models/detail.dart';
 import 'package:master_helper/core/models/detail_status.dart';
 import 'package:master_helper/features/specification/specification_bloc.dart';
-import 'package:master_helper/features/specification/widgets/detail_tile.dart';
+import 'package:master_helper/core/presentation/detail_tile.dart';
 
 class DetailsList extends StatelessWidget {
-  final List<Detail> subDetails;
+  final List<Detail> details;
   final int selectedDetailId;
 
   const DetailsList({
     Key? key,
-    required this.subDetails,
+    required this.details,
     required this.selectedDetailId,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final details = subDetails.where((detail) => detail.parentId == selectedDetailId).toList();
+    final subDetails = details.where((detail) => detail.parentId == selectedDetailId).toList();
 
     return Column(
-      children: details.map((detail) {
+      children: subDetails.map((detail) {
         return _buildDetailTile(context, detail);
       }).toList(),
     );

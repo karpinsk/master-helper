@@ -35,8 +35,6 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m6(name) => "${name}";
 
-  static String m7(serialNumber) => "SubDetail ${serialNumber} type";
-
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "addDetail": MessageLookupByLibrary.simpleMessage("Add detail"),
@@ -48,12 +46,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
-        "casting": MessageLookupByLibrary.simpleMessage("casting"),
-        "circle": MessageLookupByLibrary.simpleMessage("circle"),
+        "codeEN": MessageLookupByLibrary.simpleMessage("en"),
+        "codeKZ": MessageLookupByLibrary.simpleMessage("kz"),
+        "codePL": MessageLookupByLibrary.simpleMessage("pl"),
+        "codeRU": MessageLookupByLibrary.simpleMessage("ru"),
         "color": MessageLookupByLibrary.simpleMessage("Color"),
         "componentsOfDetail":
             MessageLookupByLibrary.simpleMessage("Components of "),
-        "cutting": MessageLookupByLibrary.simpleMessage("cutting"),
+        "darkTheme": MessageLookupByLibrary.simpleMessage("Dark theme"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "deleteConfirmation":
             MessageLookupByLibrary.simpleMessage("Delete confirmation"),
@@ -67,7 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "detailTileText": m1,
         "detailType": MessageLookupByLibrary.simpleMessage("Detail type"),
         "details": MessageLookupByLibrary.simpleMessage("Details"),
-        "detailsList": MessageLookupByLibrary.simpleMessage("Details list"),
+        "detailsList": MessageLookupByLibrary.simpleMessage("List of details"),
         "drawing": MessageLookupByLibrary.simpleMessage("Drawing"),
         "drawingAdded": MessageLookupByLibrary.simpleMessage(
             "Drawing is successfully added!"),
@@ -78,7 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "drawingRemoved":
             MessageLookupByLibrary.simpleMessage("Drawing removed"),
         "drawingSoonExpiring": MessageLookupByLibrary.simpleMessage(
-            "До истечения чертежа осталось менее 10 дней"),
+            "Drawing will expire in less than 10 days"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "editDetail": MessageLookupByLibrary.simpleMessage("Edit detail"),
         "enterDetailName":
@@ -97,8 +97,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "imageNotFound":
             MessageLookupByLibrary.simpleMessage("Image not found"),
         "information": MessageLookupByLibrary.simpleMessage("Information"),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "languageEN": MessageLookupByLibrary.simpleMessage("English"),
+        "languageKZ": MessageLookupByLibrary.simpleMessage("Қазақ"),
+        "languagePL": MessageLookupByLibrary.simpleMessage("Polski"),
+        "languageRU": MessageLookupByLibrary.simpleMessage("Русский"),
         "noNotes": MessageLookupByLibrary.simpleMessage("No notes"),
-        "none": MessageLookupByLibrary.simpleMessage("---"),
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "orderNumber": MessageLookupByLibrary.simpleMessage("Order number"),
@@ -115,25 +119,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "replacePhoto": MessageLookupByLibrary.simpleMessage("Replace photo"),
         "requiredFieldsEmpty": MessageLookupByLibrary.simpleMessage(
             "Required fields for detail or subdetails are not filled"),
-        "rubber": MessageLookupByLibrary.simpleMessage("rubber"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "searchByOrderNumber":
             MessageLookupByLibrary.simpleMessage("Search by order number"),
-        "selectDetail": MessageLookupByLibrary.simpleMessage(
-            "Select detail to see more information"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "startTypingOrderNumber": MessageLookupByLibrary.simpleMessage(
             "Start typing order number..."),
-        "statusInProgress": MessageLookupByLibrary.simpleMessage("В работе"),
-        "statusWaiting": MessageLookupByLibrary.simpleMessage("Ожидание"),
+        "statusInProgress": MessageLookupByLibrary.simpleMessage("In progress"),
+        "statusWaiting": MessageLookupByLibrary.simpleMessage("Waiting"),
         "subDetailDrawingAdded": m2,
         "subDetailInformation": m3,
         "subDetailPhotoAdded": m4,
         "subDetailSerialNumber": m5,
         "subDetailTileText": m6,
-        "subDetailTypeSerialNumber": m7,
         "techProcess":
-            MessageLookupByLibrary.simpleMessage("Technological process"),
-        "type": MessageLookupByLibrary.simpleMessage("Type")
+            MessageLookupByLibrary.simpleMessage("Technological process")
       };
 }

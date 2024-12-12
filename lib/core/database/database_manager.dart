@@ -156,6 +156,18 @@ class DatabaseManager {
     await db.close();
   }
 
+  Future<List<Detail>> getSubDetails(int parentId) async {
+    final db = await instance.database;
+
+    final result = await db.query(
+      'details',
+      where: 'parentId = ?',
+      whereArgs: [parentId],
+    );
+
+    return result.map((json) => Detail.fromMap(json)).toList();
+  }
+
   Future<List<Detail>> getDetails() async {
     try {
       final db = await instance.database;

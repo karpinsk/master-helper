@@ -130,21 +130,41 @@ class S {
     );
   }
 
-  /// `casting`
-  String get casting {
+  /// `en`
+  String get codeEN {
     return Intl.message(
-      'casting',
-      name: 'casting',
+      'en',
+      name: 'codeEN',
       desc: '',
       args: [],
     );
   }
 
-  /// `circle`
-  String get circle {
+  /// `kz`
+  String get codeKZ {
     return Intl.message(
-      'circle',
-      name: 'circle',
+      'kz',
+      name: 'codeKZ',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `pl`
+  String get codePL {
+    return Intl.message(
+      'pl',
+      name: 'codePL',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ru`
+  String get codeRU {
+    return Intl.message(
+      'ru',
+      name: 'codeRU',
       desc: '',
       args: [],
     );
@@ -170,11 +190,11 @@ class S {
     );
   }
 
-  /// `cutting`
-  String get cutting {
+  /// `Dark theme`
+  String get darkTheme {
     return Intl.message(
-      'cutting',
-      name: 'cutting',
+      'Dark theme',
+      name: 'darkTheme',
       desc: '',
       args: [],
     );
@@ -260,10 +280,10 @@ class S {
     );
   }
 
-  /// `Details list`
+  /// `List of details`
   String get detailsList {
     return Intl.message(
-      'Details list',
+      'List of details',
       name: 'detailsList',
       desc: '',
       args: [],
@@ -325,6 +345,26 @@ class S {
     return Intl.message(
       'Drawing is expired',
       name: 'drawingExpired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Drawing removed`
+  String get drawingRemoved {
+    return Intl.message(
+      'Drawing removed',
+      name: 'drawingRemoved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Drawing will expire in less than 10 days`
+  String get drawingSoonExpiring {
+    return Intl.message(
+      'Drawing will expire in less than 10 days',
+      name: 'drawingSoonExpiring',
       desc: '',
       args: [],
     );
@@ -440,11 +480,51 @@ class S {
     );
   }
 
-  /// `---`
-  String get none {
+  /// `Language`
+  String get language {
     return Intl.message(
-      '---',
-      name: 'none',
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get languageEN {
+    return Intl.message(
+      'English',
+      name: 'languageEN',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Қазақ`
+  String get languageKZ {
+    return Intl.message(
+      'Қазақ',
+      name: 'languageKZ',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Русский`
+  String get languageRU {
+    return Intl.message(
+      'Русский',
+      name: 'languageRU',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Polski`
+  String get languagePL {
+    return Intl.message(
+      'Polski',
+      name: 'languagePL',
       desc: '',
       args: [],
     );
@@ -510,6 +590,16 @@ class S {
     );
   }
 
+  /// `Photo removed`
+  String get photoRemoved {
+    return Intl.message(
+      'Photo removed',
+      name: 'photoRemoved',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Drawing was removed`
   String get removeDrawing {
     return Intl.message(
@@ -560,16 +650,6 @@ class S {
     );
   }
 
-  /// `rubber`
-  String get rubber {
-    return Intl.message(
-      'rubber',
-      name: 'rubber',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Save`
   String get save {
     return Intl.message(
@@ -590,16 +670,6 @@ class S {
     );
   }
 
-  /// `Select detail to see more information`
-  String get selectDetail {
-    return Intl.message(
-      'Select detail to see more information',
-      name: 'selectDetail',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Settings`
   String get settings {
     return Intl.message(
@@ -615,6 +685,26 @@ class S {
     return Intl.message(
       'Start typing order number...',
       name: 'startTypingOrderNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In progress`
+  String get statusInProgress {
+    return Intl.message(
+      'In progress',
+      name: 'statusInProgress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Waiting`
+  String get statusWaiting {
+    return Intl.message(
+      'Waiting',
+      name: 'statusWaiting',
       desc: '',
       args: [],
     );
@@ -670,81 +760,11 @@ class S {
     );
   }
 
-  /// `SubDetail {serialNumber} type`
-  String subDetailTypeSerialNumber(Object serialNumber) {
-    return Intl.message(
-      'SubDetail $serialNumber type',
-      name: 'subDetailTypeSerialNumber',
-      desc: '',
-      args: [serialNumber],
-    );
-  }
-
   /// `Technological process`
   String get techProcess {
     return Intl.message(
       'Technological process',
       name: 'techProcess',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Type`
-  String get type {
-    return Intl.message(
-      'Type',
-      name: 'type',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `В работе`
-  String get statusInProgress {
-    return Intl.message(
-      'В работе',
-      name: 'statusInProgress',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ожидание`
-  String get statusWaiting {
-    return Intl.message(
-      'Ожидание',
-      name: 'statusWaiting',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `До истечения чертежа осталось менее 10 дней`
-  String get drawingSoonExpiring {
-    return Intl.message(
-      'До истечения чертежа осталось менее 10 дней',
-      name: 'drawingSoonExpiring',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Drawing removed`
-  String get drawingRemoved {
-    return Intl.message(
-      'Drawing removed',
-      name: 'drawingRemoved',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Photo removed`
-  String get photoRemoved {
-    return Intl.message(
-      'Photo removed',
-      name: 'photoRemoved',
       desc: '',
       args: [],
     );
@@ -757,6 +777,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'kk'),
+      Locale.fromSubtags(languageCode: 'pl'),
       Locale.fromSubtags(languageCode: 'ru'),
     ];
   }

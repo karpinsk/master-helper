@@ -36,8 +36,6 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m6(name) => "${name}";
 
-  static String m7(serialNumber) => "Тип поддетали ${serialNumber}";
-
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "addDetail": MessageLookupByLibrary.simpleMessage("Добавить деталь"),
@@ -49,12 +47,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "back": MessageLookupByLibrary.simpleMessage("Назад"),
         "camera": MessageLookupByLibrary.simpleMessage("Камера"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
-        "casting": MessageLookupByLibrary.simpleMessage("литьё"),
-        "circle": MessageLookupByLibrary.simpleMessage("круг"),
+        "codeEN": MessageLookupByLibrary.simpleMessage("en"),
+        "codeKZ": MessageLookupByLibrary.simpleMessage("kz"),
+        "codePL": MessageLookupByLibrary.simpleMessage("pl"),
+        "codeRU": MessageLookupByLibrary.simpleMessage("ru"),
         "color": MessageLookupByLibrary.simpleMessage("Цвет"),
         "componentsOfDetail":
             MessageLookupByLibrary.simpleMessage("Компоненты детали "),
-        "cutting": MessageLookupByLibrary.simpleMessage("порезка"),
+        "darkTheme":
+            MessageLookupByLibrary.simpleMessage("Тёмная тема приложения"),
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
         "deleteConfirmation":
             MessageLookupByLibrary.simpleMessage("Подтверждение удаления"),
@@ -62,8 +63,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Вы уверены, что хотите удалить эту деталь вместе со всеми поддеталями?"),
         "deleteDetail": MessageLookupByLibrary.simpleMessage("Удалить деталь"),
         "deleteSubDetailSerialNumber": m0,
-        "detailColors":
-            MessageLookupByLibrary.simpleMessage("Обозначение статуса детали"),
         "detailName":
             MessageLookupByLibrary.simpleMessage("Наименование детали"),
         "detailTileText": m1,
@@ -77,8 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Срок годности чертежа"),
         "drawingExpired": MessageLookupByLibrary.simpleMessage(
             "Чертёж детали просрочен. Необходимо продлить чертёж"),
-        "drawingRemoved":
-            MessageLookupByLibrary.simpleMessage("Drawing removed"),
+        "drawingRemoved": MessageLookupByLibrary.simpleMessage("Чертёж удалён"),
         "drawingSoonExpiring": MessageLookupByLibrary.simpleMessage(
             "До истечения чертежа осталось менее 10 дней"),
         "edit": MessageLookupByLibrary.simpleMessage("Редактировать"),
@@ -100,15 +98,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "imageNotFound":
             MessageLookupByLibrary.simpleMessage("Изображение не найдено"),
         "information": MessageLookupByLibrary.simpleMessage("Информация"),
+        "language": MessageLookupByLibrary.simpleMessage("Язык"),
+        "languageEN": MessageLookupByLibrary.simpleMessage("English"),
+        "languageKZ": MessageLookupByLibrary.simpleMessage("Қазақ"),
+        "languagePL": MessageLookupByLibrary.simpleMessage("Polski"),
+        "languageRU": MessageLookupByLibrary.simpleMessage("Русский"),
         "noNotes": MessageLookupByLibrary.simpleMessage("Нет заметок"),
-        "none": MessageLookupByLibrary.simpleMessage("---"),
         "notes": MessageLookupByLibrary.simpleMessage("Заметки"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "orderNumber": MessageLookupByLibrary.simpleMessage("Номер заказа"),
         "photo": MessageLookupByLibrary.simpleMessage("Фото"),
         "photoAdded": MessageLookupByLibrary.simpleMessage(
             "Фото детали успешно добавлено!"),
-        "photoRemoved": MessageLookupByLibrary.simpleMessage("Photo removed"),
+        "photoRemoved": MessageLookupByLibrary.simpleMessage("Фото удалено"),
         "removeDrawing": MessageLookupByLibrary.simpleMessage("Чертёж удалён"),
         "removePhoto": MessageLookupByLibrary.simpleMessage("Фото удалено"),
         "replaceDrawing":
@@ -116,12 +118,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "replacePhoto": MessageLookupByLibrary.simpleMessage("Заменить фото"),
         "requiredFieldsEmpty": MessageLookupByLibrary.simpleMessage(
             "Обязательные поля для детали или поддеталей не заполнены"),
-        "rubber": MessageLookupByLibrary.simpleMessage("резина"),
         "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
         "searchByOrderNumber":
             MessageLookupByLibrary.simpleMessage("Искать по номеру заказа"),
-        "selectDetail": MessageLookupByLibrary.simpleMessage(
-            "Выберите деталь для отображения информации о ней"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "startTypingOrderNumber": MessageLookupByLibrary.simpleMessage(
             "Начните вводить номер заказа..."),
@@ -132,8 +131,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "subDetailPhotoAdded": m4,
         "subDetailSerialNumber": m5,
         "subDetailTileText": m6,
-        "subDetailTypeSerialNumber": m7,
-        "techProcess": MessageLookupByLibrary.simpleMessage("Тех.процесс"),
-        "type": MessageLookupByLibrary.simpleMessage("Тип")
+        "techProcess": MessageLookupByLibrary.simpleMessage("Тех.процесс")
       };
 }

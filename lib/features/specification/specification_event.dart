@@ -6,6 +6,5 @@ class SpecificationEvent with _$SpecificationEvent {
   const factory SpecificationEvent.detailSelected(int detailId) = _DetailSelected;
   const factory SpecificationEvent.commentUpdated(int detailId, String comment) = _CommentUpdated;
   const factory SpecificationEvent.techProcessUpdated(int detailId, String techProcess) = _TechProcessUpdated;
-  const factory SpecificationEvent.searchQueryChanged(String? orderNumber) = _SearchQueryChanged;
   const factory SpecificationEvent.detailStatusUpdated(int detailId, DetailStatus status) = _DetailStatusUpdated;
 }

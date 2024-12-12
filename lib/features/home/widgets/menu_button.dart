@@ -12,12 +12,13 @@ class MenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           minimumSize: const Size(double.infinity, 36),
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: theme.primaryColor,
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
         ),
         onPressed: () {
@@ -28,7 +29,7 @@ class MenuButton extends StatelessWidget {
         },
         child: Text(
           text,
-          style: const TextStyle(fontSize: 28, color: Colors.white),
+          style: theme.textTheme.titleLarge,
         ),
       ),
     );

@@ -62,7 +62,7 @@ class _InformationFieldState extends State<InformationField> {
                   )
                 : Text(
                     _infoController.text.isEmpty ? localized.noNotes : _infoController.text,
-                    style: const TextStyle(fontSize: 18),
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
             const SizedBox(height: 16.0),
             Row(

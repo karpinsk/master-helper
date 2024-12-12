@@ -16,15 +16,20 @@ class SpecificationBloc extends Bloc<SpecificationEvent, SpecificationState> {
     on<_DetailSelected>(_onDetailSelected);
     on<_CommentUpdated>(_onCommentUpdated);
     on<_TechProcessUpdated>(_onTechProcessUpdated);
-    on<_SearchQueryChanged>(_onSearchQueryChanged);
     on<_DetailStatusUpdated>(_onDetailStatusUpdated);
   }
 
+  final dbManager = DatabaseManager.instance;
+
   Future<void> _onDetailsLoaded(_DetailsLoaded event, Emitter<SpecificationState> emit) async {
-    emit(state.copyWith(isLoading: true, hasError: false, selectedDetail: null));
+    emit(state.copyWith(
+      isLoading: true,
+      hasError: false,
+      selectedDetail: null,
+    ));
 
     try {
-      final details = await DatabaseManager.instance.getDetails();
+      final details = await dbManager.getDetails();
       emit(state.copyWith(
         details: List.of(details),
         isLoading: false,
@@ -38,16 +43,28 @@ class SpecificationBloc extends Bloc<SpecificationEvent, SpecificationState> {
     }
   }
 
+  Future<void> _onDetailSelected(_DetailSelected event, Emitter<SpecificationState> emit) async {
+    try {
+      final detail = await dbManager.readDetail(event.detailId);
+      final details = await dbManager.getDetails();
+
+      emit(state.copyWith(
+        details: details,
+        selectedDetail: detail,
+        isLoading: false,
+      ));
+    } catch (_) {
+      emit(state.copyWith(hasError: true));
+    }
+  }
+
   Future<void> _onDetailStatusUpdated(_DetailStatusUpdated event, Emitter<SpecificationState> emit) async {
     try {
-      final dbManager = DatabaseManager.instance;
       final detail = await dbManager.readDetail(event.detailId);
 
       if (detail != null) {
         await dbManager.updateDetail(detail.id!, {DetailField.status: event.status.index});
-
         final details = await dbManager.getDetails();
-
         emit(state.copyWith(details: details));
       }
     } catch (_) {
@@ -57,11 +74,13 @@ class SpecificationBloc extends Bloc<SpecificationEvent, SpecificationState> {
 
   Future<void> _onCommentUpdated(_CommentUpdated event, Emitter<SpecificationState> emit) async {
     try {
-      final dbManager = DatabaseManager.instance;
       final detail = await dbManager.readDetail(event.detailId);
 
       if (detail != null) {
-        await dbManager.updateDetail(detail.id!, {DetailField.comment: event.comment});
+        await dbManager.updateDetail(
+          detail.id!,
+          {DetailField.comment: event.comment},
+        );
 
         emit(state.copyWith(
           selectedDetail: detail.copyWith(comment: event.comment),
@@ -74,7 +93,6 @@ class SpecificationBloc extends Bloc<SpecificationEvent, SpecificationState> {
 
   Future<void> _onTechProcessUpdated(_TechProcessUpdated event, Emitter<SpecificationState> emit) async {
     try {
-      final dbManager = DatabaseManager.instance;
       final detail = await dbManager.readDetail(event.detailId);
 
       if (detail != null) {
@@ -88,20 +106,5 @@ class SpecificationBloc extends Bloc<SpecificationEvent, SpecificationState> {
     } catch (_) {
       emit(state.copyWith(hasError: true));
     }
-  }
-
-  Future<void> _onDetailSelected(_DetailSelected event, Emitter<SpecificationState> emit) async {
-    final database = DatabaseManager.instance;
-    try {
-      final detail = await database.readDetail(event.detailId);
-      final details = await database.getDetails();
-      emit(state.copyWith(details: details, selectedDetail: detail));
-    } catch (_) {
-      emit(state.copyWith(hasError: true));
-    }
-  }
-
-  Future<void> _onSearchQueryChanged(_SearchQueryChanged event, Emitter<SpecificationState> emit) async {
-    emit(state.copyWith(searchQuery: event.orderNumber));
   }
 }

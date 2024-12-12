@@ -11,32 +11,26 @@ class ImageField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localized = S.of(context);
+    final textTheme = Theme.of(context).textTheme;
     if (imagePath == null) {
       return Center(
         child: Text(
           localized.imageNotAdded,
-          style: const TextStyle(fontSize: 18),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
       );
     }
 
     if (drawingExpirationDate != null && drawingExpirationDate!.isBefore(DateTime.now())) {
       return Center(
-        child: Text(
-          localized.drawingExpired,
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 18),
-        ),
+        child: Text(localized.drawingExpired, textAlign: TextAlign.center, style: textTheme.titleMedium),
       );
     }
 
     final file = File(imagePath!);
     if (!file.existsSync()) {
       return Center(
-        child: Text(
-          localized.imageNotFound,
-          style: const TextStyle(fontSize: 18),
-        ),
+        child: Text(localized.imageNotFound, style: textTheme.titleMedium),
       );
     }
 

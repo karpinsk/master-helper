@@ -149,15 +149,23 @@ class __$$ViewLoadedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ViewLoadedImpl implements _ViewLoaded {
+class _$ViewLoadedImpl with DiagnosticableTreeMixin implements _ViewLoaded {
   const _$ViewLoadedImpl({this.detailId});
 
   @override
   final int? detailId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DetailFormEvent.viewLoaded(detailId: $detailId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DetailFormEvent.viewLoaded'))
+      ..add(DiagnosticsProperty('detailId', detailId));
   }
 
   @override
@@ -328,15 +336,26 @@ class __$$MainDetailNameChangedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$MainDetailNameChangedImpl implements _MainDetailNameChanged {
+class _$MainDetailNameChangedImpl
+    with DiagnosticableTreeMixin
+    implements _MainDetailNameChanged {
   const _$MainDetailNameChangedImpl({required this.mainDetailName});
 
   @override
   final String mainDetailName;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DetailFormEvent.mainDetailNameChanged(mainDetailName: $mainDetailName)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+          DiagnosticsProperty('type', 'DetailFormEvent.mainDetailNameChanged'))
+      ..add(DiagnosticsProperty('mainDetailName', mainDetailName));
   }
 
   @override
@@ -494,12 +513,21 @@ class __$$AddButtonTappedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddButtonTappedImpl implements _AddButtonTapped {
+class _$AddButtonTappedImpl
+    with DiagnosticableTreeMixin
+    implements _AddButtonTapped {
   const _$AddButtonTappedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DetailFormEvent.addButtonTapped()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'DetailFormEvent.addButtonTapped'));
   }
 
   @override
@@ -636,12 +664,21 @@ class __$$SubmitButtonTappedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SubmitButtonTappedImpl implements _SubmitButtonTapped {
+class _$SubmitButtonTappedImpl
+    with DiagnosticableTreeMixin
+    implements _SubmitButtonTapped {
   const _$SubmitButtonTappedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DetailFormEvent.submitButtonTapped()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'DetailFormEvent.submitButtonTapped'));
   }
 
   @override
@@ -792,15 +829,25 @@ class __$$DeleteButtonTappedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DeleteButtonTappedImpl implements _DeleteButtonTapped {
+class _$DeleteButtonTappedImpl
+    with DiagnosticableTreeMixin
+    implements _DeleteButtonTapped {
   const _$DeleteButtonTappedImpl({required this.detailId});
 
   @override
   final int detailId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DetailFormEvent.deleteButtonTapped(detailId: $detailId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DetailFormEvent.deleteButtonTapped'))
+      ..add(DiagnosticsProperty('detailId', detailId));
   }
 
   @override
@@ -982,7 +1029,9 @@ class __$$DetailUpdatedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DetailUpdatedImpl implements _DetailUpdated {
+class _$DetailUpdatedImpl
+    with DiagnosticableTreeMixin
+    implements _DetailUpdated {
   const _$DetailUpdatedImpl(
       {required this.detailId, required this.field, required this.value});
 
@@ -994,8 +1043,18 @@ class _$DetailUpdatedImpl implements _DetailUpdated {
   final dynamic value;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DetailFormEvent.detailUpdated(detailId: $detailId, field: $field, value: $value)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DetailFormEvent.detailUpdated'))
+      ..add(DiagnosticsProperty('detailId', detailId))
+      ..add(DiagnosticsProperty('field', field))
+      ..add(DiagnosticsProperty('value', value));
   }
 
   @override
@@ -1183,7 +1242,9 @@ class __$$ImageSourceSelectedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ImageSourceSelectedImpl implements _ImageSourceSelected {
+class _$ImageSourceSelectedImpl
+    with DiagnosticableTreeMixin
+    implements _ImageSourceSelected {
   const _$ImageSourceSelectedImpl(
       {required this.detailId, required this.source, this.isDrawing = true});
 
@@ -1196,8 +1257,18 @@ class _$ImageSourceSelectedImpl implements _ImageSourceSelected {
   final bool isDrawing;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DetailFormEvent.imageSourceSelected(detailId: $detailId, source: $source, isDrawing: $isDrawing)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DetailFormEvent.imageSourceSelected'))
+      ..add(DiagnosticsProperty('detailId', detailId))
+      ..add(DiagnosticsProperty('source', source))
+      ..add(DiagnosticsProperty('isDrawing', isDrawing));
   }
 
   @override
@@ -1344,7 +1415,7 @@ abstract class _ImageSourceSelected implements DetailFormEvent {
 /// @nodoc
 mixin _$DetailFormState {
   DetailDto get mainDetail => throw _privateConstructorUsedError;
-  List<DetailDto> get subDetails => throw _privateConstructorUsedError;
+  List<DetailDto> get details => throw _privateConstructorUsedError;
   String get mainDetailName => throw _privateConstructorUsedError;
   bool get isSaved => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
@@ -1364,7 +1435,7 @@ abstract class $DetailFormStateCopyWith<$Res> {
   @useResult
   $Res call(
       {DetailDto mainDetail,
-      List<DetailDto> subDetails,
+      List<DetailDto> details,
       String mainDetailName,
       bool isSaved,
       bool isSubmitting});
@@ -1386,7 +1457,7 @@ class _$DetailFormStateCopyWithImpl<$Res, $Val extends DetailFormState>
   @override
   $Res call({
     Object? mainDetail = null,
-    Object? subDetails = null,
+    Object? details = null,
     Object? mainDetailName = null,
     Object? isSaved = null,
     Object? isSubmitting = null,
@@ -1396,9 +1467,9 @@ class _$DetailFormStateCopyWithImpl<$Res, $Val extends DetailFormState>
           ? _value.mainDetail
           : mainDetail // ignore: cast_nullable_to_non_nullable
               as DetailDto,
-      subDetails: null == subDetails
-          ? _value.subDetails
-          : subDetails // ignore: cast_nullable_to_non_nullable
+      details: null == details
+          ? _value.details
+          : details // ignore: cast_nullable_to_non_nullable
               as List<DetailDto>,
       mainDetailName: null == mainDetailName
           ? _value.mainDetailName
@@ -1426,7 +1497,7 @@ abstract class _$$DetailFormStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {DetailDto mainDetail,
-      List<DetailDto> subDetails,
+      List<DetailDto> details,
       String mainDetailName,
       bool isSaved,
       bool isSubmitting});
@@ -1446,7 +1517,7 @@ class __$$DetailFormStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? mainDetail = null,
-    Object? subDetails = null,
+    Object? details = null,
     Object? mainDetailName = null,
     Object? isSaved = null,
     Object? isSubmitting = null,
@@ -1456,9 +1527,9 @@ class __$$DetailFormStateImplCopyWithImpl<$Res>
           ? _value.mainDetail
           : mainDetail // ignore: cast_nullable_to_non_nullable
               as DetailDto,
-      subDetails: null == subDetails
-          ? _value._subDetails
-          : subDetails // ignore: cast_nullable_to_non_nullable
+      details: null == details
+          ? _value._details
+          : details // ignore: cast_nullable_to_non_nullable
               as List<DetailDto>,
       mainDetailName: null == mainDetailName
           ? _value.mainDetailName
@@ -1478,23 +1549,25 @@ class __$$DetailFormStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DetailFormStateImpl implements _DetailFormState {
+class _$DetailFormStateImpl
+    with DiagnosticableTreeMixin
+    implements _DetailFormState {
   const _$DetailFormStateImpl(
       {required this.mainDetail,
-      required final List<DetailDto> subDetails,
+      required final List<DetailDto> details,
       required this.mainDetailName,
       required this.isSaved,
       required this.isSubmitting})
-      : _subDetails = subDetails;
+      : _details = details;
 
   @override
   final DetailDto mainDetail;
-  final List<DetailDto> _subDetails;
+  final List<DetailDto> _details;
   @override
-  List<DetailDto> get subDetails {
-    if (_subDetails is EqualUnmodifiableListView) return _subDetails;
+  List<DetailDto> get details {
+    if (_details is EqualUnmodifiableListView) return _details;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_subDetails);
+    return EqualUnmodifiableListView(_details);
   }
 
   @override
@@ -1505,8 +1578,20 @@ class _$DetailFormStateImpl implements _DetailFormState {
   final bool isSubmitting;
 
   @override
-  String toString() {
-    return 'DetailFormState(mainDetail: $mainDetail, subDetails: $subDetails, mainDetailName: $mainDetailName, isSaved: $isSaved, isSubmitting: $isSubmitting)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DetailFormState(mainDetail: $mainDetail, details: $details, mainDetailName: $mainDetailName, isSaved: $isSaved, isSubmitting: $isSubmitting)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DetailFormState'))
+      ..add(DiagnosticsProperty('mainDetail', mainDetail))
+      ..add(DiagnosticsProperty('details', details))
+      ..add(DiagnosticsProperty('mainDetailName', mainDetailName))
+      ..add(DiagnosticsProperty('isSaved', isSaved))
+      ..add(DiagnosticsProperty('isSubmitting', isSubmitting));
   }
 
   @override
@@ -1516,8 +1601,7 @@ class _$DetailFormStateImpl implements _DetailFormState {
             other is _$DetailFormStateImpl &&
             (identical(other.mainDetail, mainDetail) ||
                 other.mainDetail == mainDetail) &&
-            const DeepCollectionEquality()
-                .equals(other._subDetails, _subDetails) &&
+            const DeepCollectionEquality().equals(other._details, _details) &&
             (identical(other.mainDetailName, mainDetailName) ||
                 other.mainDetailName == mainDetailName) &&
             (identical(other.isSaved, isSaved) || other.isSaved == isSaved) &&
@@ -1529,7 +1613,7 @@ class _$DetailFormStateImpl implements _DetailFormState {
   int get hashCode => Object.hash(
       runtimeType,
       mainDetail,
-      const DeepCollectionEquality().hash(_subDetails),
+      const DeepCollectionEquality().hash(_details),
       mainDetailName,
       isSaved,
       isSubmitting);
@@ -1547,7 +1631,7 @@ class _$DetailFormStateImpl implements _DetailFormState {
 abstract class _DetailFormState implements DetailFormState {
   const factory _DetailFormState(
       {required final DetailDto mainDetail,
-      required final List<DetailDto> subDetails,
+      required final List<DetailDto> details,
       required final String mainDetailName,
       required final bool isSaved,
       required final bool isSubmitting}) = _$DetailFormStateImpl;
@@ -1555,7 +1639,7 @@ abstract class _DetailFormState implements DetailFormState {
   @override
   DetailDto get mainDetail;
   @override
-  List<DetailDto> get subDetails;
+  List<DetailDto> get details;
   @override
   String get mainDetailName;
   @override

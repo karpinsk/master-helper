@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,24 +36,23 @@ class DetailFormBloc extends Bloc<DetailFormEvent, DetailFormState> {
       if (mainDetail == null) {
         emit(state.copyWith(
           mainDetail: DetailDto(id: _generateTemporaryId()),
-          subDetails: [],
+          details: [],
         ));
         return;
       }
 
-      final subDetails = await Future.wait(
+      final details = await Future.wait(
         mainDetail.subDetailIds.map((id) => dbManager.readDetail(id)),
       );
 
-      final mainDetailShort = DetailDto().fromDetail(mainDetail);
-      final subDetailsShort = subDetails.map((sub) => DetailDto().fromDetail(sub)).toList();
+      final mainDetailDto = DetailDto().fromDetail(mainDetail);
+      final detailsDto = details.map((sub) => DetailDto().fromDetail(sub)).toList();
 
-      emit(state.copyWith(
-          mainDetail: mainDetailShort, subDetails: subDetailsShort, mainDetailName: mainDetailShort.name ?? ''));
+      emit(state.copyWith(mainDetail: mainDetailDto, details: detailsDto, mainDetailName: mainDetailDto.name ?? ''));
     } catch (e, s) {
       if (kDebugMode) {
-        print(e);
-        print(s);
+        log(e.toString());
+        log(s.toString());
       }
     }
   }
@@ -62,8 +62,8 @@ class DetailFormBloc extends Bloc<DetailFormEvent, DetailFormState> {
   }
 
   Future<void> _onAddButtonTapped(_AddButtonTapped event, Emitter<DetailFormState> emit) async {
-    final updatedSubDetails = List<DetailDto>.from(state.subDetails)..add(DetailDto(id: _generateTemporaryId()));
-    emit(state.copyWith(subDetails: updatedSubDetails));
+    final updatedDetails = List<DetailDto>.from(state.details)..add(DetailDto(id: _generateTemporaryId()));
+    emit(state.copyWith(details: updatedDetails));
   }
 
   Future<void> _onDetailUpdated(_DetailUpdated event, Emitter<DetailFormState> emit) async {
@@ -73,7 +73,7 @@ class DetailFormBloc extends Bloc<DetailFormEvent, DetailFormState> {
 
       emit(state.copyWith(mainDetail: updatedMainDetail));
     } else {
-      final updatedSubDetails = state.subDetails.map((detail) {
+      final updatedDetails = state.details.map((detail) {
         if (detail.id == event.detailId) {
           final updatedDetail = detail.copyWith();
           updatedDetail.updateField(event.field, event.value);
@@ -82,7 +82,7 @@ class DetailFormBloc extends Bloc<DetailFormEvent, DetailFormState> {
         return detail;
       }).toList();
 
-      emit(state.copyWith(subDetails: updatedSubDetails));
+      emit(state.copyWith(details: updatedDetails));
     }
   }
 
@@ -103,8 +103,8 @@ class DetailFormBloc extends Bloc<DetailFormEvent, DetailFormState> {
 
     String orderNumber = state.mainDetail.orderNumber!;
 
-    // Add subdetails with the main detail's ID
-    for (var subDetail in state.subDetails) {
+    // Add details with the main detail's ID
+    for (var subDetail in state.details) {
       subDetail.orderNumber = orderNumber;
       subDetail.parentId = parentId;
       int subDetailId;
@@ -138,8 +138,8 @@ class DetailFormBloc extends Bloc<DetailFormEvent, DetailFormState> {
       await dbManager.deleteDetail(detailId);
     }
 
-    final updatedSubDetails = state.subDetails.where((detail) => detail.id != detailId).toList();
-    emit(state.copyWith(subDetails: updatedSubDetails));
+    final updatedDetails = state.details.where((detail) => detail.id != detailId).toList();
+    emit(state.copyWith(details: updatedDetails));
   }
 
   // When add button is tapped, we need to assign some id for our detail to be able to delete it

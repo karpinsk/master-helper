@@ -10,10 +10,7 @@ class SpecificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => SpecificationBloc()
-        ..add(
-          detailId == null ? const SpecificationEvent.detailsLoaded() : SpecificationEvent.detailSelected(detailId!),
-        ),
+      create: (_) => SpecificationBloc()..add(SpecificationEvent.detailSelected(detailId!)),
       child: const SpecificationView(),
     );
   }

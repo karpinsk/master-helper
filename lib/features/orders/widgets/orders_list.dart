@@ -1,26 +1,22 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:master_helper/core/models/detail.dart';
 import 'package:intl/intl.dart';
-import 'package:master_helper/features/specification/specification_bloc.dart';
-import 'package:master_helper/features/specification/widgets/detail_tile.dart';
+import 'package:master_helper/features/specification/specification_page.dart';
+import 'package:master_helper/core/presentation/detail_tile.dart';
 
-class DetailsByMonthsList extends StatelessWidget {
+class OrdersList extends StatelessWidget {
   final List<Detail> details;
-  final BuildContext context;
 
-  const DetailsByMonthsList({
+  const OrdersList({
     Key? key,
     required this.details,
-    required this.context,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final groupedDetails = _groupDetailsByMonth(details.where((d) => d.parentId == null).toList());
-    final bloc = context.read<SpecificationBloc>();
 
     return Column(
       children: groupedDetails.entries.map((entry) {
@@ -32,8 +28,14 @@ class DetailsByMonthsList extends StatelessWidget {
           children: entry.value.map((detail) {
             return DetailTile(
               onTap: () {
-                bloc.add(SpecificationEvent.detailSelected(detail.id!));
-                bloc.add(const SpecificationEvent.searchQueryChanged(null));
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SpecificationPage(
+                      detailId: detail.id!,
+                    ),
+                  ),
+                );
               },
               onSlide: () {},
               detail: detail,

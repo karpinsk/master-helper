@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:master_helper/core/blocs/language/language_cubit.dart';
+import 'package:master_helper/core/blocs/theme/theme_cubit.dart';
+import 'package:master_helper/core/models/language.dart';
 import 'package:master_helper/generated/l10n.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -7,6 +11,10 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localized = S.of(context);
+    final isDark = context.watch<ThemeCubit>().state.isDarkTheme;
+    final languageCode = context.watch<LanguageCubit>().state.languageCode;
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       appBar: AppBar(title: Text(S.of(context).settings)),
       body: SafeArea(
@@ -15,96 +23,56 @@ class SettingsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                localized.detailColors,
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 20),
-              Expanded(
-                child: _DetailColorTable(
-                  headers: [localized.type, localized.color],
-                  rows: [
-                    _DetailColorRow(
-                      icon: const Icon(Icons.warning, color: Colors.red),
-                      label: S.current.drawingExpired,
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      localized.darkTheme,
+                      style: textTheme.titleSmall,
                     ),
-                    _DetailColorRow(
-                      icon: const Icon(Icons.warning, color: Colors.orange),
-                      label: S.current.drawingSoonExpiring,
+                    SizedBox(
+                      width: 60,
+                      height: 48,
+                      child: FittedBox(
+                        fit: BoxFit.fill,
+                        child: Switch(
+                          value: isDark,
+                          onChanged: (value) {
+                            context.read<ThemeCubit>().setThemeBrightness(value);
+                          },
+                        ),
+                      ),
                     ),
                   ],
                 ),
+              ),
+              const Divider(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    localized.language,
+                    style: textTheme.titleSmall,
+                  ),
+                  DropdownMenu<Language>(
+                    enableSearch: false,
+                    enableFilter: false,
+                    initialSelection: Language.fromCode(languageCode),
+                    dropdownMenuEntries: Language.values
+                        .map((language) => DropdownMenuEntry(
+                              value: language,
+                              label: language.name,
+                            ))
+                        .toList(),
+                    onSelected: (language) => context.read<LanguageCubit>().setLanguage(language!.code),
+                  ),
+                ],
               ),
             ],
           ),
         ),
       ),
     );
-  }
-}
-
-class _DetailColorRow {
-  final Widget icon;
-  final String label;
-
-  _DetailColorRow({required this.icon, required this.label});
-}
-
-class _DetailColorTable extends StatelessWidget {
-  final List<String> headers;
-  final List<_DetailColorRow> rows;
-
-  const _DetailColorTable({
-    required this.headers,
-    required this.rows,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Table(
-      border: TableBorder.all(),
-      children: [
-        _buildHeaderRow(),
-        ..._buildDataRows(),
-      ],
-    );
-  }
-
-  TableRow _buildHeaderRow() {
-    return TableRow(
-      children: headers
-          .map(
-            (header) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                header,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          )
-          .toList(),
-    );
-  }
-
-  List<TableRow> _buildDataRows() {
-    return rows.map((row) {
-      return TableRow(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: Center(child: row.icon),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: Text(
-              row.label,
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ],
-      );
-    }).toList();
   }
 }

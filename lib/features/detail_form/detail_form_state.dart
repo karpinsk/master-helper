@@ -4,7 +4,7 @@ part of 'detail_form_bloc.dart';
 class DetailFormState with _$DetailFormState {
   const factory DetailFormState({
     required DetailDto mainDetail,
-    required List<DetailDto> subDetails,
+    required List<DetailDto> details,
     required String mainDetailName,
     required bool isSaved,
     required bool isSubmitting,
@@ -13,7 +13,7 @@ class DetailFormState with _$DetailFormState {
   factory DetailFormState.initial() {
     return DetailFormState(
       mainDetail: DetailDto(),
-      subDetails: [],
+      details: [],
       mainDetailName: '',
       isSubmitting: false,
       isSaved: false,
